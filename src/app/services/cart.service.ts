@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Cart } from '../shared/models/Cart';
 import { CartItem } from '../shared/models/CartItem';
 import { Food } from '../shared/models/Food';
-import { environment } from '../../enviornments/environment';
+import { environment } from '../../../../backend/src/enviornments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ORDER_ADD_CART_URL } from '../shared/constants/urls';
 

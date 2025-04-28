@@ -10,7 +10,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Cart } from '../../../shared/models/Cart';
 import { jwtDecode } from 'jwt-decode';
 import { StripeService } from '../../../services/stripe.service';
-import { environment } from '../../../../enviornments/environment';
+import { environment } from '../../../../../../backend/src/enviornments/environment';
 
 @Component({
     selector: 'app-checkout-page',
