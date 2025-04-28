@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { loadStripe, Stripe, StripeCardElement, StripeElements  } from '@stripe/stripe-js';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../enviornments/environment';
+import { environment } from '../../environments/environment';
 import { ORDER_PAY_URL } from '../shared/constants/urls';
 
 // Preloading Stripe using environment variable for the public key
