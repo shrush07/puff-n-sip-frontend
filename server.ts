@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import 'localstorage-polyfill';
 import AppServerModule from './src/main.server';
+import proxy from 'express-http-proxy'; 
 
 export function app(): express.Express {
   const server = express();
@@ -13,6 +14,9 @@ export function app(): express.Express {
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
   const commonEngine = new CommonEngine();
+  
+  // Proxy API requests to backend server
+  server.use('/api', proxy('http://localhost:5000'));  
 
   // Middleware for CORS and JSON parsing
   server.use(express.json());
