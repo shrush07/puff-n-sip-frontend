@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="details">
+    <app-title [title]="isResetPasswordMode ? 'Reset Password' : 'Login'"></app-title>
+
+    <!-- Login Form -->
+    <form *ngIf="!isResetPasswordMode" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <text-input
+        [control]="fc.email"
+        [showErrorsWhen]="isSubmitted"
+        type="text"
+        label="Email"
+      ></text-input>
+
+      <text-input
+        [control]="fc.password"
+        [showErrorsWhen]="isSubmitted"
+        type="password"
+        label="Password"
+      ></text-input>
+
+      <div class="forgot-password">
+        <a (click)="toggleResetPasswordMode()">Forgot Password?</a>
+      </div>
+
+      <button class="btn">Login</button>
+
+      <div class="register">
+        New user? &nbsp;
+        <a routerLink="/register" [queryParams]="{ returnUrl: returnUrl }">
+          Register here 
+        </a>
+      </div>
+    </form>
+
+    <!-- Reset Password Form -->
+    <form *ngIf="isResetPasswordMode" [formGroup]="resetPasswordForm" (ngSubmit)="requestPasswordReset()">
+      <text-input
+        [control]="resetFc.email"
+        [showErrorsWhen]="isSubmitted"
+        type="email"
+        label="Enter your registered Email"
+      ></text-input>
+
+      <!-- <text-input
+        [control]="resetFc.newPassword"
+        [showErrorsWhen]="isSubmitted"
+        type="password"
+        label="New Password"
+      ></text-input> -->
+
+      <button type="submit" [disabled]="isLoading" class="btn">
+        {{ isLoading ? 'Sending...' : 'Send Link' }}
+      </button>
+
+      <div class="forgot-password">
+        <a (click)="toggleResetPasswordMode()">Back to Login</a>
+      </div>
+    </form>
+  </div>
+</div>

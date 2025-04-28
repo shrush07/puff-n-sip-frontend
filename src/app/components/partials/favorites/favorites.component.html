@@ -1,0 +1,6 @@
+<div *ngFor="let food of foods">
+  <span (click)="toggleFavorite(food)" class="favorite {{ food.favorite ? '' : 'not' }}" >❤Fav
+    <!-- Heart ❤ Icon -->
+    <!-- <i class="fa-solid fa-heart"></i> -->
+  </span>
+</div>

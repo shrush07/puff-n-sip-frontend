@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 3rem;
+  }
+  
+  .details{
+    width: 25rem;
+  }
+  
+  .login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } 
+  
+  .btn{
+    color: #ffffff;
+    background: #b08f5c;
+    border: 2px solid #b08f5c;
+    font-size: 1.2rem;
+    padding: 1rem;
+    cursor: pointer;
+    width: 200px;
+    
+  }

@@ -1,0 +1,57 @@
+<div class="header">
+  <nav class="side-nav">
+    <a routerLink="/" class="l-a">
+      <img src="assets/images/logo.png" alt="Logo" class="logo" />
+    </a>
+    <div id="header-nav" class="snavbar navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-item" routerLink="/" routerLinkActive="active" spy={true}>HOME</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item" routerLink="/menu" routerLinkActive="active" spy={true}>MENU</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item" routerLink="/contact" routerLinkActive="active" spy={true}>CONTACT</a>
+        </li>
+      </ul>
+    </div>
+    <div class="settings">
+      <ul class="profile">
+        <li *ngIf="!isAuth" class="s-sites">
+          <a routerLink="/login" class="menu-link">Login</a>
+        </li>
+        <li *ngIf="isAuth" class="menu-container">
+          <a routerLink="/dashboard" class="menu-link">{{user.name}}</a>
+          <div class="menu">
+            <a routerLink="/profile">Profile</a>
+            <a routerLink="/orders">Orders</a>
+            <a (click)="logout()">Logout</a>
+          </div>
+        </li>
+        <li class="s-sites">
+          <a routerLink="/cart-page" class="menu-link">Cart <span *ngIf="cartQuantity">{{cartQuantity}}</span></a>
+        </li>
+      </ul>
+    </div>
+    <app-search></app-search>
+    
+    <div class="social-icons">
+      <ul class="social">
+        <li class="s-sites">
+          <a
+            class="s-as"
+            href="/favorites"
+            ><i class="fa-regular fa-heart"></i></a>
+        </li>
+        <li class="s-sites">
+          <a
+            class="s-as"
+            href="https://www.instagram.com/puff.n.sip/"
+            target="blank"
+            ><i class="fa-brands fa-instagram"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

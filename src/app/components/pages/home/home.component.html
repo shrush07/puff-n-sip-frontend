@@ -1,0 +1,96 @@
+<div class="home">
+  <div id="banner" class="banner">
+    <h6 class="banner-sm-title">The One Stop Shop</h6>
+    <h1 class="banner-title">Discover the taste of real flavors</h1>
+    <button class="button">Explore More</button>
+  </div>
+  <div id="pop-items" class="pop-items">
+    <h3 class="pop-title">Popular Items</h3>
+  <app-tags></app-tags>
+    <div class="items">
+      <ul class="items">
+        <li *ngFor="let food of foods" class="item">
+          <!-- <a routerLink="/food/{{ food.id }}" class="link"> -->
+            <a [routerLink]="['/food', food?._id]" (click)="logFood(food)" class="link">
+             <img [src]="food.imageUrl" [alt]="food.name"  class="item-img"/>
+            </a>
+            <div class="content">
+                <div class="item-tnp">
+                  <div class="name">
+                    <a [routerLink]="['/food', food?._id]" (click)="logFood(food)" class="link pop-sm-title">{{ food.name }}</a>
+                  </div>
+                  <div class="price">
+                    <span class="price">
+                      {{food.price | currency:'INR'}}
+                    </span>
+                  </div>
+                </div>
+                <div class="item-btn">
+                  <span (click)="toggleFavorite(food)" class="favorite {{food.favorite ? '' : 'not'}}">❤
+                    <!-- Heart ❤ Icon -->
+                    <!-- <i class="fa-solid fa-heart"></i> -->
+                  </span>
+                  
+                  <button (click)="addToCart(food)" class="cart-btn">🛒
+                    <!-- Cart Icon -->
+                    <!-- <i class="fa-solid fa-cart-shopping"></i> -->
+                  </button>
+                </div>
+            </div>
+        </li>
+      </ul>
+    </div>
+    <div class="pop-btn">
+      <button class="button"><a class="nav-item button" routerLink="/menu">Explore More</a></button>
+    </div>
+  </div>
+
+  
+  <div id="about" class="about">
+    <div class="ab-info">
+      <div class="info-card" *ngFor="let card of aboutCards">
+        <h4 class="info-no">{{ card.number }}</h4>
+        <h5 class="info-title">{{ card.title }}</h5>
+        <p class="info">{{ card.description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="tag">
+    <img src="assets/images/tag.png" />
+  </div>
+  <div class="contact">
+    <div class="address">
+      <h3 class="con-head">Vadodara</h3>
+      <p class="contact-p">
+        GF-36, Florence Excellence, Vasna - Bhayli Main Rd, Bhayli, Vadodara,
+        Gujarat 390015, India
+      </p>
+      <a href="tel:8980492630" class="call">+91 89804 92630</a>
+    </div>
+    <div class="form">
+      <form id="contact-form" onSubmit="{handleSubmit}">
+        <!-- <Form id="contact-form" (submit)="register()" (ngSubmit)="onSubmit()" #contactForm="ngForm"> -->
+        <div class="con-row">
+          <div class="cn-col">
+            <input for="name" id="name" name="name" type="text" class="form-control" placeholder="Name" autocomplete="name" required />
+          </div>
+          <div class="cn-col">
+            <input name="email" id="email" name="email" type="text" class="form-control" placeholder="Email" autocomplete="email" required />
+          </div>
+          <div class="cn-col">
+            <input  name="ratings" id="ratings" name="ratings" type="text" class="form-control" placeholder="Ratings out of 10" autocomplete="off" required  />
+          </div>
+          <div class="cn-col">
+            <input name="phone" id="tel" name="tel" type="tel" maxLength="10" class="form-control" placeholder="Contact Number" autocomplete="tel" required />
+          </div>
+          <div class="cn-row">
+            <textarea name="message" id="message" name="message" class="form-control" rows="5" placeholder="Write a Review..." spellCheck="false" autocomplete="off" required ></textarea>
+          </div>
+        </div>
+        <p class="co-p">
+          <Button id="submit-btn" class="button" type="submit">SUBMIT</Button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+.container{
+  margin-top: 1rem;
+  display: flex;
+  margin: 0 2rem 6rem 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 260px;
+}
+
+.content{
+  width: 35rem;
+  margin-right: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary > div{
+  display: flex;
+  margin-top: 0.7rem;
+}
+
+.summary span {
+  font-size: 1.2rem;
+}
+
+.summary h3{
+  margin: 0 1rem 0 0;
+  flex-basis: 5rem;
+}
+
+.item-list{
+  margin-left: 1rem;
+}
+
+.buttons-container{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+#card-element {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.stripe-element{
+  text-align: center;
+}
+
+.buttons-container{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.buttons{
+  margin: 2rem;
+  width: 35rem;
+  text-align: center;
+}
+.button{
+  font-family: 'Archivo';
+  background-color: #b08f5c;
+  height: 50px;
+  width: 170px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.btn-link{
+color: #ffffff;
+text-decoration: none;
+}
+
+button:hover{
+  opacity: 1;
+  cursor: pointer;
+}

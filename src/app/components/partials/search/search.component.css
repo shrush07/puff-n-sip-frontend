@@ -1,0 +1,42 @@
+div{
+    display: flex;
+    justify-content: center;
+}
+
+.input-item{
+    height: 40px;
+    width: 120px;
+    background-color: #f1f1f1;
+    padding: 0px 5px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid white;
+}
+
+.button{
+    font-family: 'Archivo';
+    background-color: #b08f5c;
+    height: 2.6rem;
+    width: 2.7rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+}
+
+.button:hover {
+    border: 2px solid #b08f5c;
+    background-color: #f0d0b4;
+    color: #b08f5c;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search{
+    font-size: 1.5rem;
+}

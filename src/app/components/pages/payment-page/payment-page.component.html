@@ -1,0 +1,28 @@
+<app-title title="Payment Page" fontSize="1.6rem"></app-title>
+<div *ngIf="order" class="container">
+  <div class="summary">
+    <div>
+      <h3>Name:</h3>
+      <span>{{ order.name }}</span>
+    </div>
+    <div>
+      <h3>Address:</h3>
+      <span>{{ order.address }}</span>
+    </div>
+  </div>
+  <order-items-list [order]="order"></order-items-list>
+
+  <div id="card-errors" role="alert" style="color: red"></div>
+   
+  <div>
+    <div class="buttons-container">
+      <!-- Stripe Card Element -->
+      <div id="card-element" class="stripe-element">
+        <!-- Stripe will inject the card input fields here -->
+      </div> 
+      <div class="buttons">
+        <button (click)="handlePayment();" id="submit-payment" class="button">Submit Payment</button>
+      </div>
+    </div>
+  </div>
+</div>

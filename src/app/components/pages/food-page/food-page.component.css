@@ -1,0 +1,84 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 3rem;
+    flex-direction: column;
+    margin-left: 260px;
+    align-content: center;
+}
+
+.container > *{
+    min-width: 25rem;
+    max-width: 40rem;
+}
+
+img{
+    flex: 1 0;
+    object-fit: cover;
+}
+
+.food-details{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    margin-top: 2rem
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.name{
+    font-size: 2rem;
+    font-family: bold;
+    font-family: 'Archivo';
+}
+
+.favorite{
+    color: #b08f5c;
+    font-size: 1.5rem;
+}
+
+.favorite.not{
+    color: #456874;
+}
+
+.tags{
+    display: flex;
+    font-family: 'Archivo';
+    flex-wrap: wrap;
+}
+
+.tags a{
+    background-color: #f0d0b4;
+    padding: 0.3rem 1rem;
+    margin: 0.5rem 0;
+    font-weight: 600;
+    color: #49340d;
+    text-decoration: none;
+}
+
+.price{
+    font-size: 1.8rem;
+    margin: 1rem 0;
+    color: #b08f5c;
+}
+
+.cart-btn{
+    color: #ffffff;
+    background: #b08f5c;
+    border: 2px solid #b08f5c;
+    font-size: 1.2rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.cart-btn:hover{
+    background: none;
+    color: #b08f5c;
+    border: 2px solid #b08f5c;
+}
