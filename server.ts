@@ -14,20 +14,15 @@ export function app(): express.Express {
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
   const commonEngine = new CommonEngine();
-  
+
   // Proxy API requests to backend server
-  server.use('/api', proxy('http://localhost:5000'));  
+  const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+  console.log(`Proxying API requests to: ${backendUrl}`);
+  server.use('/api', proxy(backendUrl));
+
 
   // Middleware for CORS and JSON parsing
   server.use(express.json());
-  // server.use(
-  //   cors({
-  //     origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
-  //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  //     allowedHeaders: ['Content-Type', 'Authorization'],
-  //     credentials: true,
-  //   })
-  // );
 
   // Serve static files from /browser
   server.get(
