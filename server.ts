@@ -17,12 +17,15 @@ export function app(): express.Express {
 
   // Determine backend URL based on environment
   const backendUrl = process.env.NODE_ENV === 'production'
-    ? 'https://puff-sip.onrender.com'  // Production URL
-    : 'http://localhost:5000';  // Local URL
+    ? 'https://puff-sip.onrender.com'  
+    : 'http://localhost:5000';  
 
   console.log(`Proxying API requests to: ${backendUrl}`);
   server.use('/api', proxy(backendUrl));
 
+  // Middleware for CORS and JSON parsing
+  server.use(express.json());
+  
   // Serve static files from /browser
   server.get(
     '**',
