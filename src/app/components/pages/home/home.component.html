@@ -14,7 +14,7 @@
     <ul class="items">
       <li *ngFor="let food of foods" class="item">
         <a [routerLink]="['/food', food?._id]" class="link" (click)="logFood(food)">
-          <img [src]="food.imageUrl" [alt]="food.name" class="item-img" />
+          <img [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="item-img" />
         </a>
         <div class="content">
           <div class="item-tnp">

@@ -16,7 +16,7 @@ export function app(): express.Express {
   const commonEngine = new CommonEngine();
 
   // Proxy API requests to backend server
-  const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+  const backendUrl = process.env.apiUrl || 'http://localhost:5000';
   console.log(`Proxying API requests to: ${backendUrl}`);
   server.use('/api', proxy(backendUrl));
 
