@@ -15,14 +15,13 @@ export function app(): express.Express {
 
   const commonEngine = new CommonEngine();
 
-  // Proxy API requests to backend server
-  const backendUrl = process.env.apiUrl || 'http://localhost:5000';
+  // Determine backend URL based on environment
+  const backendUrl = process.env.NODE_ENV === 'production'
+    ? 'https://puff-sip.onrender.com'  // Production URL
+    : 'http://localhost:5000';  // Local URL
+
   console.log(`Proxying API requests to: ${backendUrl}`);
   server.use('/api', proxy(backendUrl));
-
-
-  // Middleware for CORS and JSON parsing
-  server.use(express.json());
 
   // Serve static files from /browser
   server.get(
