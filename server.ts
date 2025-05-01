@@ -6,6 +6,7 @@ import { dirname, join, resolve } from 'node:path';
 import 'localstorage-polyfill';
 import AppServerModule from './src/main.server';
 import proxy from 'express-http-proxy'; 
+import WebSocket from 'ws';
 
 export function app(): express.Express {
   const server = express();
@@ -34,6 +35,22 @@ export function app(): express.Express {
       index: false,
     })
   );
+
+  // Websocket closure
+  const wsClient = new WebSocket('ws://localhost:5000');
+
+  wsClient.on('open', () => {
+    console.log('WebSocket client connected to ws://localhost:5000');
+    wsClient.close(1000, 'Normal Closure');
+  });
+  
+  wsClient.on('close', (code, reason) => {
+    console.log(`WebSocket closed with code ${code}, reason: ${reason}`);
+  });
+  
+  wsClient.on('error', (err) => {
+    console.error('WebSocket error:', err);
+  });
 
   // All regular routes use the Angular engine
   server.get('**', (req, res, next) => {
