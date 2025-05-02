@@ -142,6 +142,15 @@ export class HomeComponent implements OnInit{
 
 
   ngOnInit(): void {
- 
+    this.foodService.getFoods().subscribe({
+      next: (foods: Food[]) => {
+        console.log('Received foods:', foods);
+        this.foods = foods;
+      },
+      error: (error: any) => {
+        console.error('Failed to fetch foods:', error);
+      }
+    });
   }
+  
 }
