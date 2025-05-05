@@ -77,7 +77,7 @@
           "options": {
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [{ "glob": "**/*", "input": "public" }],
+            "assets": [{ "glob": "**/*", "input": "public" }, "src/favicon.ico", "src/_redirects", "src/assets"],
             "styles": [
               "src/styles.css",
               "node_modules/toastr/build/toastr.css",
