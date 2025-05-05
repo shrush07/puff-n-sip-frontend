@@ -48,7 +48,7 @@ export class CheckoutPageComponent implements OnInit {
 
     this.order.items = cart?.items || [];
     this.order.totalPrice = cart?.totalPrice || 0;
-    this.order.imageUrl = this.getOrderImageUrl(); 
+    this.order.imageUrl = this.getImageUrl('default.jpg'); 
 
     const { name, address } = this.userService.currentUser;
     this.checkoutForm = this.formBuilder.group({
@@ -90,8 +90,12 @@ export class CheckoutPageComponent implements OnInit {
        
   }
 
-  private getOrderImageUrl(): string {
-    // Placeholder for a method that returns a valid image URL
-    return 'http://localhost:4200/order-image.jpg';
+  getImageUrl(imageFileName: string): string {
+    const backendUrl = window.location.hostname === 'localhost' 
+      ? 'http://localhost:5000' 
+      : 'https://puff-sip.onrender.com';
+
+    const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
+    return `${backendUrl}/images/${cleanedFileName}`;
   }
 }

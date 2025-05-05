@@ -11,14 +11,27 @@ import { Food } from '../../../shared/models/Food';
 })
 export class CartPageComponent implements OnInit {
 
+  foods:any[] = [];
   cart!: Cart;
   constructor(private cartService: CartService) {
     this.cartService.getCartObservable().subscribe((cart) => {
       this.cart = cart;
+      
     })
    }
 
-   
+   getImageUrl(imageFileName: string): string {
+    const backendUrl = window.location.hostname === 'localhost' 
+      ? 'http://localhost:5000' 
+      : 'https://puff-sip.onrender.com';
+  
+    // Remove 'assets/images/' or 'assets/' if present at the start of the path
+    const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
+  
+    // Return the URL without the 'assets/images/' prefix
+    return `${backendUrl}/images/${cleanedFileName}`;
+  }
+ 
 
   ngOnInit(): void {
   }

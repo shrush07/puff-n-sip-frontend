@@ -1,11 +1,11 @@
 <div *ngIf="food" class="container">
-    <img [src]="food.imageUrl" [alt]="food.name" />
-    <div class="food-details">
+    <img [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="item-img" />
+        <div class="food-details">
         <div class="header">
             <span class="name">                    
                 {{food.name}}
             </span>
-            <span class="favorite {{food.favorite? '' : 'not'}}">❤</span>
+            <span (click)="toggleFavorite(food)" [ngClass]="{ 'favorite': true, 'not': !food.favorite }">❤</span>
         </div>
         <div class="tags">
             <a *ngFor="let tag of food.tags" routerLink="/tag/{{tag}}">

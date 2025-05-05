@@ -23,11 +23,8 @@
                     <!-- Heart ❤ Icon -->
                     <!-- <i class="fa-solid fa-heart"></i> -->
                   
-                  <span 
-                    (click)="toggleFavorite(food)" 
-                    class="favorite" 
-                    [class.not]="!food.favorite">❤
-                  </span>
+                  <span (click)="toggleFavorite(food)" [ngClass]="{ 'favorite': true, 'not': !food.favorite }">❤</span>
+            
                   <button (click)="addToCart(food)" class="cart-btn">🛒
                     <!-- Cart Icon -->
                     <!-- <i class="fa-solid fa-cart-shopping"></i> -->

@@ -38,9 +38,41 @@ export class FoodPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getImageUrl(imageFileName: string): string {
+    const backendUrl = window.location.hostname === 'localhost' 
+      ? 'http://localhost:5000' 
+      : 'https://puff-sip.onrender.com';
+  
+    // Remove 'assets/images/' or 'assets/' if present at the start of the path
+    const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
+  
+    // Return the URL without the 'assets/images/' prefix
+    return `${backendUrl}/images/${cleanedFileName}`;
+  }
+
   addToCart(){
     console.log("foodid",this.food);
     this.cartService.addToCart(this.food);
     this.router.navigateByUrl('/cart-page');
+  }
+
+  toggleFavorite(food: Food): void {
+    if (!food) {
+      console.error('Food object is required to toggle favorite.');
+      return;
+    }
+  
+    const updatedFavoriteStatus = !food.favorite;
+  
+    this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus).subscribe({
+      next: () => {
+        console.log(`${food.name} favorite status updated.`);
+        food.favorite = updatedFavoriteStatus;
+      },
+      error: (error) => {
+        console.error('Error updating favorite status:', error);
+        alert('Failed to update favorite status.');
+      },
+    });
   }
 }

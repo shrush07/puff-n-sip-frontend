@@ -58,7 +58,7 @@ export class PaymentPageComponent implements OnInit,  AfterViewInit {
     }
 
     console.log('Final Order:', this.order);
-    this.order.imageUrl = this.getOrderImageUrl(); // Example method to get image URL
+    this.order.imageUrl = this.getOrderImageUrl(); 
   
     // Initialize Stripe
     await this.setupStripe();
@@ -153,28 +153,24 @@ export class PaymentPageComponent implements OnInit,  AfterViewInit {
   
   // Handle success after payment confirmation
   paymentSuccess(paymentIntent: any): void {
-    console.log('Payment Intent:', paymentIntent); // Debugging log
-    console.log('Order ID:', this.order._id); // Debugging log
-
+    console.log('Payment Intent:', paymentIntent);
+    console.log('Order ID:', this.order._id);
+    
     const payload = { orderId: this.order._id, paymentId: paymentIntent.id };
     
     if (!payload.orderId || !payload.paymentId) {
-      console.error('Invalid payload:', payload);
-      this.toastrService.error('Invalid order or payment information.');
-      return;
+    console.error('Invalid payload:', payload);
+    this.toastrService.error('Invalid order or payment information.');
+    return;
     }
-
+    
     this.http.post('/api/orders/payment/success', payload).subscribe(
-      () => {
-        this.toastrService.success('Payment successful Redirecting...');
-        this.router.navigate(['/order-success']);
-      },
-      (error) => {
-        console.error('Order submission failed:', error);
-        this.toastrService.error('Payment success but order failed');
+    () => {
+       this.cartService.clearCart();
       }
     );
   }
+
 
   // Placeholder for the order image URL
   private getOrderImageUrl(): string {

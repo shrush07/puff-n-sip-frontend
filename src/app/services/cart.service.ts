@@ -40,8 +40,6 @@ export class CartService {
     console.log('Updated cart items:', JSON.stringify(this.cart.items, null, 2));
     this.setCartToLocalStorage();
     return this.http.post<void>(ORDER_ADD_CART_URL, { foodId: food._id });
-    //this.updateCartInDatabase();
-    // this.updateCartInDatabase();
   }
 
   private isSameFood(food1: Food, food2: Food): boolean {
@@ -53,32 +51,26 @@ export class CartService {
   }
 
   removeFromCart(foodId: string): void {
-    console.log('Component: Removal process completed');
-    console.log('Step 1: Attempting to remove product from cart with ID:', foodId);
-    console.log('Step 2: Current cart items:', JSON.stringify(this.cart.items, null, 2));
+    console.log('Current cart items:', JSON.stringify(this.cart.items, null, 2));
   
     let itemRemoved = false;
     const newCartItems = [];
   
     for (let i = 0; i < this.cart.items.length; i++) {
       const item = this.cart.items[i];
-      console.log(`Step 3: Checking item ${i}:`, JSON.stringify(item, null, 2));
+      console.log(`Checking item ${i}:`, JSON.stringify(item, null, 2));
       
       if (item.food._id === foodId && !itemRemoved) {
-        console.log(`Step 4: Removing item ${i}`);
         itemRemoved = true;
       } else {
-        console.log(`Step 5: Keeping item ${i}`);
         newCartItems.push(item);
       }
     }
   
     this.cart.items = newCartItems;
-    console.log('Step 6: Updated cart items:', JSON.stringify(this.cart.items, null, 2));
+    console.log('Updated cart items:', JSON.stringify(this.cart.items, null, 2));
   
     this.setCartToLocalStorage();
-    console.log('Step 7: Cart updated in local storage');
-    //this.updateCartInDatabase();
   }
 
   changeQuantity(foodId: string, quantity: number): void {
@@ -88,13 +80,12 @@ export class CartService {
     cartItem.quantity = quantity;
     cartItem.price = quantity * cartItem.food.price;
     this.setCartToLocalStorage();
-    // this.updateCartInDatabase();
   }
 
-  clearCart(): void {
-    this.cart = new Cart();
-    this.setCartToLocalStorage();
-  //  this.updateCartInDatabase();
+  clearCart() {
+    localStorage.removeItem('Cart');
+    this.cart = new Cart(); 
+    this.cartSubject.next(this.cart);
   }
 
   getCartObservable(): Observable<Cart> {
@@ -106,7 +97,6 @@ export class CartService {
   }
 
   private setCartToLocalStorage(): void {
-    console.log('Step 8: Setting cart to local storage');
     this.cart.totalPrice = this.cart.items.reduce(
       (prevSum, currentItem) => prevSum + currentItem.price,
       0
@@ -119,7 +109,7 @@ export class CartService {
     const cartJson = JSON.stringify(this.cart);
     localStorage.setItem('Cart', cartJson);
     this.cartSubject.next(this.cart);
-    console.log('Step 9: Cart updated:', JSON.stringify(this.cart, null, 2));
+    console.log('Cart updated:', JSON.stringify(this.cart, null, 2));
   }
 
   private getCartFromLocalStorage(): Cart {
@@ -140,4 +130,5 @@ export class CartService {
   updateCart(cart: Cart): void {
     this.cartSubject.next(cart);
   }
+  
 }
