@@ -72,6 +72,7 @@ export class HomeComponent implements OnInit{
   }
 
   toggleFavorite(food: Food): void {
+    food.favorite = !food.favorite;
     if (!food) {
       console.error('Food object is required to toggle favorite.');
       return;

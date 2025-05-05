@@ -1,0 +1,118 @@
+
+/*----Popular Items----*/
+
+.pop-items{
+    position: relative;
+    overflow: hidden;
+    margin-left: 260px;
+    padding: 2.5rem;
+}
+
+.pop-title{
+    font-family: 'Dancing Script';
+    font-size: 32px;
+    color: #b08f5c;
+}
+
+.pop-sm-title{
+    font-family: 'Archivo';
+    font-size: 20px;
+    text-decoration: none;
+    color: #49340d;
+    font-weight: 600;
+    margin-bottom: 1%;
+}
+
+.items{
+    /* display: flex; */
+    flex-direction: row;
+    padding-left: 0;
+}
+
+.item{
+    height: 360px;
+    width: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .content{
+    position: relative;
+    width: 200px;
+}
+
+.favorite{
+    position: absolute;
+    right: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.favorite:not(.not) {
+    color: #b08f5c;  
+}
+
+.favorite.not{
+    color: #456874;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.name{
+    font-family: 'Archivo';
+    font-size: 20px;
+    text-decoration: none;
+    color: #49340d;
+    font-weight: 600;
+    margin-bottom: 1%;
+    text-decoration: none;
+}
+
+.price{
+    font-size: 16px;
+    font-family: 'Archivo';
+    color: #b08f5c;
+    margin-bottom: 1%;
+}
+
+.cart-btn{
+    color: #ffffff;
+    background: #b08f5c;
+    border: 2px solid #b08f5c;
+    font-size: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.cart-btn:hover{
+    background: none;
+    color: #b08f5c;
+    border: 2px solid #b08f5c;
+}
+
+.item-btn{
+    display: flex;
+    align-items: center;
+}
+
+.item-tnp{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}

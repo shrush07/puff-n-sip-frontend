@@ -20,11 +20,13 @@
                   </div>
                 </div>
                 <div class="item-btn">
-                    <!-- Heart ❤ Icon -->
-                    <!-- <i class="fa-solid fa-heart"></i> -->
-                  
-                  <span (click)="toggleFavorite(food)" [ngClass]="{ 'favorite': true, 'not': !food.favorite }">❤</span>
-            
+                    <!-- ❤️ Heart Icon placed correctly -->
+                    <i class="fa fa-heart"
+                        [class.fa-solid]="food.favorite"
+                        [class.fa-regular]="!food.favorite"
+                        [class.favorite]="true"
+                        (click)="toggleFavorite(food)">
+                    </i>
                   <button (click)="addToCart(food)" class="cart-btn">🛒
                     <!-- Cart Icon -->
                     <!-- <i class="fa-solid fa-cart-shopping"></i> -->

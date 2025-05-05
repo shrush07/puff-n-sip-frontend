@@ -30,6 +30,7 @@ img{
 .header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .name{
@@ -38,13 +39,16 @@ img{
     font-family: 'Archivo';
 }
 
-.favorite{
+.favorite {
+    right: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 2;
     color: #b08f5c;
-    font-size: 1.5rem;
 }
-
-.favorite.not{
-    color: #456874;
+  
+.favorite.fa-regular {
+    color: #456874; 
 }
 
 .tags{

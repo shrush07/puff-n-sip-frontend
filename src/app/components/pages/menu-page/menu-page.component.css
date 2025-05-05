@@ -48,16 +48,17 @@
     width: 200px;
 }
 
-.favorite{
+.favorite {
     position: absolute;
     right: 0;
     font-size: 1.2rem;
-    color: #b08f5c;
     cursor: pointer;
+    z-index: 2;
+    color: #b08f5c;
 }
-
-.favorite.not{
-    color: #456874;
+  
+.favorite.fa-regular {
+    color: #456874; 
 }
 
 .link{
