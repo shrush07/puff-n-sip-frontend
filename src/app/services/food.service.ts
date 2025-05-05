@@ -19,7 +19,7 @@ export class FoodService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Fixed: getFoods now properly implemented
+  // Fixed: getFoods now properly implemented
   getFoods(): Observable<Food[]> {
     return this.http.get<Food[]>(`${FOODS_URL}`);
   }
@@ -46,9 +46,9 @@ export class FoodService {
     return this.http.get<Food>(`${FOODS_URL}/${foodId}`);
   }
 
-  updateFavoriteStatus(_id: string, _updatedFavoriteStatus: boolean, food: Food): Observable<void> {
-    return this.http.patch<void>(`${UPDATE_FAVORITE_URL}/${food._id}`, {
-      favorite: food.favorite,
-    });
+  updateFavoriteStatus(foodId: string, favorite: boolean): Observable<void> {
+    return this.http.patch<void>(`${FOODS_URL}/${foodId}/favorite`, { favorite });
   }
+  
+  
 }

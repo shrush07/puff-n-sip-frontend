@@ -70,19 +70,16 @@ export class HomeComponent implements OnInit{
     // Return the URL without the 'assets/images/' prefix
     return `${backendUrl}/images/${cleanedFileName}`;
   }
-  
-  
-  
 
   toggleFavorite(food: Food): void {
-    console.log('heart clicked');
     if (!food) {
       console.error('Food object is required to toggle favorite.');
       return;
     }
+  
     const updatedFavoriteStatus = !food.favorite;
-
-    this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus, food).subscribe({
+  
+    this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus).subscribe({
       next: () => {
         console.log(`${food.name} favorite status updated.`);
         food.favorite = updatedFavoriteStatus;

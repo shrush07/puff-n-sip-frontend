@@ -19,7 +19,7 @@ foods: Food[] = [];
     }
     const updatedFavoriteStatus = !food.favorite;
 
-    this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus, food).subscribe({
+    this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus).subscribe({
       next: () => {
         console.log(`${food.name} favorite status updated.`);
         food.favorite = updatedFavoriteStatus;

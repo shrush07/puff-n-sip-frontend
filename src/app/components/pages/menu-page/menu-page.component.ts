@@ -68,14 +68,14 @@ export class MenuPageComponent implements OnInit{
   }
 
   toggleFavorite(food: Food): void {
-    console.log('heart clicked');
     if (!food) {
       console.error('Food object is required to toggle favorite.');
       return;
     }
+  
     const updatedFavoriteStatus = !food.favorite;
-
-    this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus, food).subscribe({
+  
+    this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus).subscribe({
       next: () => {
         console.log(`${food.name} favorite status updated.`);
         food.favorite = updatedFavoriteStatus;
@@ -86,4 +86,5 @@ export class MenuPageComponent implements OnInit{
       },
     });
   }
+  
 }
