@@ -121,6 +121,36 @@ p{
     color: #456874; 
 }
   
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+  
+.items {
+    display: flex;
+    gap: 1rem;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+  
+.carousel-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 1rem;
+    color: #333;
+}
+  
+.carousel-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+  
 
 .link{
     text-decoration: none;

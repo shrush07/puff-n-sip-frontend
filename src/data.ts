@@ -1,14 +1,12 @@
-import { Food } from "./app/shared/models/Food";
-import { Tag } from "./app/shared/models/Tag";
-
-export const sample_foods: Food[] = [
+export const sample_foods: any[] = [
   {
     _id: '1',
     name: 'Coffee',
     price: 120.0,
-    imageUrl: 'https://puff-sip.onrender.com/images/coffee1.png',
+    imageUrl: 'coffee1.png',
     tags: ['Coffee'],
     favorite: false,
+    createdAt: '2024-08-01T10:00:00Z',
   },
   {
     _id: '2',
@@ -17,6 +15,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/juice1.png',
     tags: ['Mocktail'],
     favorite: false,
+    createdAt: '2024-06-01T10:00:00Z',
   },
   {
     _id: '3',
@@ -25,6 +24,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/puff1.png',
     tags: ['Puff'],
     favorite: false,
+    createdAt: '2024-06-07T10:00:00Z',
   },
   {
     _id: '4',
@@ -33,6 +33,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/croisaant1.png',
     tags: ['Croisaant'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
   {
     _id: '5',
@@ -41,6 +42,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/coffee2.png',
     tags: ['Coffee'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
   {
     _id: '6',
@@ -49,6 +51,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/burger1.png',
     tags: ['Burger'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
   {
     _id: '7',
@@ -57,6 +60,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/juice2.png',
     tags: ['Mocktail'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
   {
     _id: '8',
@@ -65,6 +69,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/coffee3.png',
     tags: ['Coffee'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
   {
     _id: '9',
@@ -73,6 +78,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/croisaant2.png',
     tags: ['Croisaant'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
   {
     _id: '10',
@@ -81,6 +87,7 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/puff2.png',
     tags: ['Puff'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
   {
     _id: '11',
@@ -89,14 +96,39 @@ export const sample_foods: Food[] = [
     imageUrl: 'https://puff-sip.onrender.com/images/coffee4.png',
     tags: ['Coffee'],
     favorite: true,
+    createdAt: '2024-05-01T10:00:00Z',
   },
 ];
 
-export const sample_tags: Tag[] = [
+export const sample_tags: any[] = [
   { name: 'All', count: 11 },
   { name: 'Coffee', count: 4 },
   { name: 'Mocktail', count: 2 },
   { name: 'Puff', count: 2 },
   { name: 'Burger', count: 1 },
   { name: 'Croisaant', count: 2 },
+];
+
+export const sample_users: any[] = [
+  {
+    name: 'John Doe',
+    email: 'jhon@gmail.com',
+    password: '1234',
+    address: 'Toronto',
+    isAdmin: true,
+  },
+  {
+    name: 'Jane Doe',
+    email: 'jane@gmail.com',
+    password: '1234',
+    address: 'Sudbury',
+    isAdmin: false,
+  },
+  {
+    name: 'Srushti Patel',
+    email: 'shrupatel07@gmail.com',
+    password: '1234567',
+    address: 'Sudbury',
+    isAdmin: true,
+  },
 ];

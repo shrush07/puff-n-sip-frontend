@@ -11,35 +11,44 @@
     <h3 class="pop-title">Popular Items</h3>
     <app-tags></app-tags>
 
-    <ul class="items">
-      <li *ngFor="let food of foods" class="item">
-        <a [routerLink]="['/food', food?._id]" class="link" (click)="logFood(food)">
-          <img [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="item-img" />
-        </a>
-        <div class="content">
-          <div class="item-tnp">
-            <div class="name">
-              <a [routerLink]="['/food', food?._id]" class="link pop-sm-title">{{ food.name }}</a>
+    <div class="carousel-container">
+      <button class="carousel-btn left" (click)="slideLeft()" [disabled]="currentStartIndex === 0">
+        ‹
+      </button>
+    
+      <ul class="items">
+        <li *ngFor="let food of visibleFoods" class="item">
+          <a [routerLink]="['/food', food._id]" class="link">
+            <img [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="item-img" />
+          </a>
+          <div class="content">
+            <div class="item-tnp">
+              <div class="name">
+                <a [routerLink]="['/food', food._id]" class="link pop-sm-title">{{ food.name }}</a>
+              </div>
+              <div class="price">
+                <span>{{ food.price | currency: 'INR' }}</span>
+              </div>
             </div>
-            <div class="price">
-              <span>{{ food.price | currency: 'INR' }}</span>
+    
+            <div class="item-btn">
+              <i class="fa fa-heart"
+                [class.fa-solid]="food.favorite"
+                [class.fa-regular]="!food.favorite"
+                [class.favorite]="true"
+                (click)="toggleFavorite(food)">
+              </i>
+              <button (click)="addToCart(food)" class="cart-btn">🛒</button>
             </div>
           </div>
-      
-          <div class="item-btn">
-            <!-- ❤️ Heart Icon placed correctly -->
-            <i class="fa fa-heart"
-               [class.fa-solid]="food.favorite"
-               [class.fa-regular]="!food.favorite"
-               [class.favorite]="true"
-               (click)="toggleFavorite(food)">
-            </i>
-            <button (click)="addToCart(food)" class="cart-btn">🛒</button>
-          </div>
-        </div>
-      </li>
-      
-    </ul>
+        </li>
+      </ul>
+    
+      <button class="carousel-btn right" (click)="slideRight()" [disabled]="currentStartIndex + visibleCount >= foods.length">
+        ›
+      </button>
+    </div>
+    
 
     <div class="pop-btn">
       <button class="button">

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Food } from '../../../shared/models/Food';
 import { FoodService } from '../../../services/food.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Food } from '../../../shared/models/Food';
 import { CartService } from '../../../services/cart.service';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css'],
-    standalone: false
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
+  standalone: false
 })
-export class HomeComponent implements OnInit{
-  foods:any[] = [];
-  router: any;
+export class HomeComponent implements OnInit {
+  foods: Food[] = [];
+  currentStartIndex: number = 0; 
+  visibleCount: number = 4;
 
   aboutCards = [
     {
@@ -38,117 +38,80 @@ export class HomeComponent implements OnInit{
     },
   ];
 
-  constructor(private foodService:FoodService, activatedRoute:ActivatedRoute, private cartService: CartService) {
-    let foodsObservable: Observable<Food[]>;
-    activatedRoute.params.subscribe((params) => {
-      if(params.searchTerm)
+  constructor(
+    private foodService: FoodService,
+    private activatedRoute: ActivatedRoute,
+    private cartService: CartService
+  ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      let foodsObservable;
+
+      if (params.searchTerm) {
         foodsObservable = this.foodService.getAllFoodsBySearchTerm(params.searchTerm);
-      else if(params.tag)
+      } else if (params.tag) {
         foodsObservable = this.foodService.getAllFoodsByTag(params.tag);
-      else
-      foodsObservable = foodService.getAll();
+      } else {
+        foodsObservable = this.foodService.getAll();
+      }
 
-      foodsObservable.subscribe((serverFoods) => {
-        this.foods = serverFoods;
-        this.foods = this.foods.slice(0, 4); // Only keep the first 4 items
-    })
-  })
+      foodsObservable.subscribe({
+        next: (foods) => {
+          this.foods = foods.sort((a, b) => {
+            return new Date(b.createdAt as string).getTime() - new Date(a.createdAt as string).getTime();
+          });
+        },
+        error: (error) => {
+          console.error('Failed to fetch foods:', error);
+        }
+      });
+    });
   }
 
-  logFood(food: any) {
-    console.log('Clicked food:', food);
+  // Getter for the products that should be visible based on the current index
+  get visibleFoods(): Food[] {
+    return this.foods.slice(this.currentStartIndex, this.currentStartIndex + this.visibleCount);
   }
-  
+
+  // Slide left: Decrease the start index by 1
+  slideLeft(): void {
+    if (this.currentStartIndex > 0) {
+      this.currentStartIndex--;
+    }
+  }
+
+  // Slide right: Increase the start index by 1
+  slideRight(): void {
+    if (this.currentStartIndex + this.visibleCount < this.foods.length) {
+      this.currentStartIndex++;
+    }
+  }
+
   getImageUrl(imageFileName: string): string {
     const backendUrl = window.location.hostname === 'localhost' 
       ? 'http://localhost:5000' 
       : 'https://puff-sip.onrender.com';
-  
-    // Remove 'assets/images/' or 'assets/' if present at the start of the path
+
     const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
-  
-    // Return the URL without the 'assets/images/' prefix
     return `${backendUrl}/images/${cleanedFileName}`;
   }
 
   toggleFavorite(food: Food): void {
-    food.favorite = !food.favorite;
-    if (!food) {
-      console.error('Food object is required to toggle favorite.');
-      return;
-    }
-  
     const updatedFavoriteStatus = !food.favorite;
-  
     this.foodService.updateFavoriteStatus(food._id, updatedFavoriteStatus).subscribe({
-      next: () => {
-        console.log(`${food.name} favorite status updated.`);
-        food.favorite = updatedFavoriteStatus;
-      },
+      next: () => (food.favorite = updatedFavoriteStatus),
       error: (error) => {
-        console.error('Error updating favorite status:', error);
+        console.error('Error updating favorite:', error);
         alert('Failed to update favorite status.');
-      },
+      }
     });
   }
-  
+
   addToCart(food: Food): void {
-    if (!food) {
-      console.error('Food ID is required to add an item to the cart.');
-      return;
-    }
-  
     this.cartService.addToCart(food).subscribe({
-      next: () => {
-        console.log('${food.name} added to cart successfully.');
-      },
-      error: (error) => {
-        console.error('Error adding item to cart:', error);
-      },
+      next: () => console.log(`${food.name} added to cart.`),
+      error: (error) => console.error('Cart error:', error),
     });
   }
-  
-  handleSubmit = async(e:any) =>{
-    // e.preventDefault();
-
-    try {
-      const response = await fetch("http://puff-n-sip.netlify.app/api/form/contact", {
-        method:"POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: e.target.name.value,
-          email: e.target.email.value,
-          ratings: e.target.ratings.value,
-          contact: e.target.contact.value,
-          message: e.target.message.value
-        })
-      });
-
-      if(response.ok){
-        const data = await response.json();
-        console.log(data);
-        alert("Message sent successfully");
-        e.target.reset();
-      }
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
-  ngOnInit(): void {
-    this.foodService.getFoods().subscribe({
-      next: (foods: Food[]) => {
-        console.log('Received foods:', foods);
-        this.foods = foods;
-      },
-      error: (error: any) => {
-        console.error('Failed to fetch foods:', error);
-      }
-    });
-  }
-  
 }

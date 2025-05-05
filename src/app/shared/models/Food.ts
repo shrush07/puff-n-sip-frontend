@@ -5,4 +5,5 @@ export class Food{
     imageUrl! : string;
     tags?: string[];
     favorite!: boolean;
+    createdAt!: String;
 }
