@@ -12,6 +12,7 @@ export class TagsComponent implements OnInit {
   tags?: Tag[];
   constructor(foodService: FoodService) {
     foodService.getAllTags().subscribe(serverTags => {
+      console.log("Received tags:", serverTags);
       this.tags= serverTags;
     });
   }

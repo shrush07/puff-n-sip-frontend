@@ -15,4 +15,36 @@ div a{
 
 a .active {
     background-color: #b08f5c;
-}
+} 
+
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: 'Archivo';
+    margin: 0.2rem 0.15rem;
+    margin-bottom: 1rem;
+    max-height: none;
+  }
+  
+  .tag-link {
+    background-color: #b08f5c;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s ease;
+  }
+  
+  .tag-link:hover {
+    border: 1px solid #b08f5c;
+    background-color: transparent;
+  }
+  
+  .active {
+    font-weight: bold;
+    color: #b08f5c;
+  }
+  

@@ -1,9 +1,10 @@
-<div *ngIf="tags">
-    <a
-      *ngFor="let tag of tags"
-      routerLinkActive="active"
-      routerLink="/tag/{{ tag.name }}"
-    >
-      {{ tag.name }}({{ tag.count }})
-    </a>
-  </div>
+<div *ngIf="tags" class="tags-container">
+  <a
+    *ngFor="let tag of tags"
+    class="tag-link"
+    routerLink="/tag/{{ tag.name }}"
+    routerLinkActive="active"
+  >
+    {{ tag.name }} ({{ tag.count }})
+  </a>
+</div>

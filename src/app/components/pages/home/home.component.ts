@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
           this.foods = foods.sort((a, b) => {
             return new Date(b.createdAt as string).getTime() - new Date(a.createdAt as string).getTime();
           });
+          console.log('Fetched foods:', this.foods);
         },
         error: (error) => {
           console.error('Failed to fetch foods:', error);
@@ -69,19 +70,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // Getter for the products that should be visible based on the current index
   get visibleFoods(): Food[] {
     return this.foods.slice(this.currentStartIndex, this.currentStartIndex + this.visibleCount);
   }
 
-  // Slide left: Decrease the start index by 1
   slideLeft(): void {
     if (this.currentStartIndex > 0) {
       this.currentStartIndex--;
     }
   }
 
-  // Slide right: Increase the start index by 1
   slideRight(): void {
     if (this.currentStartIndex + this.visibleCount < this.foods.length) {
       this.currentStartIndex++;
@@ -89,13 +87,21 @@ export class HomeComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-    const backendUrl = window.location.hostname === 'localhost' 
-      ? 'http://localhost:5000' 
-      : 'https://puff-sip.onrender.com';
-
-    const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
-    return `${backendUrl}/images/${cleanedFileName}`;
+    console.log('Received Image File Name:', imageFileName);  // Debug log
+  
+    const isFullUrl = imageFileName.startsWith('http') || imageFileName.startsWith('https');
+    
+    const backendUrl = isFullUrl ? '' : (window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000' 
+        : 'https://puff-sip.onrender.com');
+    
+    if (isFullUrl) {
+      return imageFileName;
+    }
+  
+    return `${backendUrl}/images/${imageFileName}`;
   }
+  
 
   toggleFavorite(food: Food): void {
     const updatedFavoriteStatus = !food.favorite;
