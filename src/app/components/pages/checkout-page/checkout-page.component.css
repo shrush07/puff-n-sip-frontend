@@ -1,0 +1,68 @@
+.container{
+    margin-top: 1rem;
+    display: flex;
+    margin: 0 2rem 6rem 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: 'Nunito';
+    font-family: 'Archivo';
+    margin-left: 260px;
+  }
+  
+  .content{
+    width: 20rem;
+    margin-right: 3rem;
+  }
+  
+  .content,form{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form{
+    width: 100%;
+  }
+
+  .order-list{
+    width: 35rem;
+  }
+  
+  .buttons-container{
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .buttons{
+    margin: 2rem;
+    width: 35rem;
+    text-align: center;
+  }
+  .button{
+    font-family: 'Archivo';
+    background-color: #b08f5c;
+    height: 50px;
+    width: 170px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.btn-link{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a.button:hover{
+  color: #49340d;
+  text-decoration: none;
+}
+  
+  button:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .map-cp{
+    height: 100px;
+    width: 100px;
+  }

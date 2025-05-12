@@ -1,0 +1,18 @@
+div{
+    display: flex;
+    font-family: 'Archivo';
+    flex-wrap: wrap;
+}
+
+div a{
+    background-color: #f0d0b4;
+    padding: 0.3rem 1rem;
+    margin: 0.2rem 0.15rem;
+    font-weight: 600;
+    color: #49340d;
+    text-decoration: none;
+}
+
+a .active {
+    background-color: #b08f5c;
+}

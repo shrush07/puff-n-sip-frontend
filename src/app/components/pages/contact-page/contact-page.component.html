@@ -1,0 +1,37 @@
+<div class="contact">
+    <h3 class="pop-title">Contact</h3>
+
+    <div class="address">
+      <h3 class="con-head">Vadodara</h3>
+      <p class="contact-p">
+        GF-36, Florence Excellence, Vasna - Bhayli Main Rd, Bhayli, Vadodara,
+        Gujarat 390015, India
+      </p>
+      <a href="tel:8980492630" class="call">+91 89804 92630</a>
+    </div>
+    <div class="form">
+      <form id="contact-form" onSubmit="{handleSubmit}">
+        <!-- <Form id="contact-form" (submit)="register()" (ngSubmit)="onSubmit()" #contactForm="ngForm"> -->
+        <div class="con-row">
+          <div class="cn-col">
+            <input for="name" id="name" name="name" type="text" class="form-control" placeholder="Name" autocomplete="name" required />
+          </div>
+          <div class="cn-col">
+            <input name="email" id="email" name="email" type="text" class="form-control" placeholder="Email" autocomplete="email" required />
+          </div>
+          <div class="cn-col">
+            <input  name="ratings" id="ratings" name="ratings" type="text" class="form-control" placeholder="Ratings out of 10" autocomplete="off" required  />
+          </div>
+          <div class="cn-col">
+            <input name="phone" id="tel" name="tel" type="tel" maxLength="10" class="form-control" placeholder="Contact Number" autocomplete="tel" required />
+          </div>
+          <div class="cn-row">
+            <textarea name="message" id="message" name="message" class="form-control" rows="5" placeholder="Write a Review..." spellCheck="false" autocomplete="off" required ></textarea>
+          </div>
+        </div>
+        <p class="co-p">
+          <Button id="submit-btn" class="button" type="submit">SEND</Button>
+        </p>
+      </form>
+    </div>
+  </div>

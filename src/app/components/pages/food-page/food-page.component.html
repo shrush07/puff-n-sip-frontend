@@ -1,0 +1,28 @@
+<div *ngIf="food" class="container">
+    <img [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="item-img" />
+        <div class="food-details">
+        <div class="header">
+            <span class="name">                    
+                {{food.name}}
+            </span>
+            <!-- ❤️ Heart Icon placed correctly -->
+            <i class="fa fa-heart"
+               [class.fa-solid]="food.favorite"
+               [class.fa-regular]="!food.favorite"
+               [class.favorite]="true"
+               (click)="toggleFavorite(food)">
+            </i>
+        </div>
+        <div class="tags">
+            <a *ngFor="let tag of food.tags" routerLink="/tag/{{tag}}">
+                {{tag}}
+            </a>
+        </div>
+        <div class="price">
+            <span>
+                {{food.price | currency:'INR'}}
+            </span>
+        </div>
+        <button (click)="addToCart()" class="cart-btn">Add to Cart</button>
+    </div>
+</div>

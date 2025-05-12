@@ -1,0 +1,21 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Greater Sudbury",
+			"country": {
+				"code": "CA",
+				"name": "Canada"
+			},
+			"subdivision": {
+				"code": "ON",
+				"name": "Ontario"
+			},
+			"timezone": "America/Toronto",
+			"latitude": 46.2676,
+			"longitude": -80.9063,
+			"postalCode": "P3E"
+		},
+		"timestamp": 1742171609081
+	},
+	"siteId": "4e8e6e48-7833-4475-a74d-65374817909f"
+}

@@ -1,0 +1,111 @@
+<div class="home">
+  <!-- Banner Section -->
+  <div id="banner" class="banner">
+    <h6 class="banner-sm-title">The One Stop Shop</h6>
+    <h1 class="banner-title">Discover the taste of real flavors</h1>
+    <button class="button">Explore More</button>
+  </div>
+
+  <!-- Popular Items Section -->
+  <div id="pop-items" class="pop-items">
+    <h3 class="pop-title">Popular Items</h3>
+    <app-tags></app-tags>
+
+    <div class="carousel-container">
+      <button class="carousel-btn left" (click)="slideLeft()" [disabled]="currentStartIndex === 0">
+        ‹
+      </button>
+    
+      <ul class="items">
+        <li *ngFor="let food of visibleFoods" class="item">
+          <a [routerLink]="['/food', food._id]" class="link">
+            <img [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="item-img" />
+          </a>
+          <div class="content">
+            <div class="item-tnp">
+              <div class="name">
+                <a [routerLink]="['/food', food._id]" class="link pop-sm-title">{{ food.name }}</a>
+              </div>
+              <div class="price">
+                <span>{{ food.price | currency: 'INR' }}</span>
+              </div>
+            </div>
+    
+            <div class="item-btn">
+              <i class="fa fa-heart"
+                [class.fa-solid]="food.favorite"
+                [class.fa-regular]="!food.favorite"
+                [class.favorite]="true"
+                (click)="toggleFavorite(food)">
+              </i>
+              <button (click)="addToCart(food)" class="cart-btn">🛒</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+      <button class="carousel-btn right" (click)="slideRight()" [disabled]="currentStartIndex + visibleCount >= foods.length">
+        ›
+      </button>
+    </div>
+    
+
+    <div class="pop-btn">
+      <button class="button">
+        <a routerLink="/menu" class="nav-item button">Explore More</a>
+      </button>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div id="about" class="about">
+    <div class="ab-info">
+      <div class="info-card" *ngFor="let card of aboutCards">
+        <h4 class="info-no">{{ card.number }}</h4>
+        <h5 class="info-title">{{ card.title }}</h5>
+        <p class="info">{{ card.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branding Tag -->
+  <div class="tag">
+    <img src="assets/images/tag.png" alt="Brand Tag" />
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact">
+    <div class="address">
+      <h3 class="con-head">Vadodara</h3>
+      <p class="contact-p">
+        GF-36, Florence Excellence, Vasna - Bhayli Main Rd, Bhayli, Vadodara, Gujarat 390015, India
+      </p>
+      <a href="tel:8980492630" class="call">+91 89804 92630</a>
+    </div>
+
+    <div class="form">
+      <form id="contact-form" onSubmit="{handleSubmit}">
+        <div class="con-row">
+          <div class="cn-col">
+            <input type="text" name="name" ngModel class="form-control" placeholder="Name" required />
+          </div>
+          <div class="cn-col">
+            <input type="email" name="email" ngModel class="form-control" placeholder="Email" required />
+          </div>
+          <div class="cn-col">
+            <input type="number" name="ratings" ngModel class="form-control" placeholder="Ratings out of 10" required />
+          </div>
+          <div class="cn-col">
+            <input type="tel" name="phone" ngModel class="form-control" placeholder="Contact Number" maxlength="10" required />
+          </div>
+          <div class="cn-row">
+            <textarea name="message" ngModel class="form-control" rows="5" placeholder="Write a Review..." required></textarea>
+          </div>
+        </div>
+        <p class="co-p">
+          <button id="submit-btn" class="button" type="submit">SUBMIT</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

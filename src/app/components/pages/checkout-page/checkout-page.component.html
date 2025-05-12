@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="content">
+    <app-title title="Order Details" fontSize="1.6rem"></app-title>
+    <form [formGroup]="checkoutForm" (ngSubmit)="createOrder()">
+      <text-input [control]="fc.name" label="Name"></text-input>
+      <text-input [control]="fc.address" label="Address"></text-input>
+      
+      <label for="orderType">Order Type</label>
+      <select id="orderType" formControlName="orderType">
+        <option [value]="OrderType.ONLINE">Online</option>
+        <option [value]="OrderType.INSTORE">In Store</option>
+      </select>
+    </form>
+  </div>
+
+  <div class="order-list">
+    <order-items-list [order]="order"></order-items-list>
+  </div>
+
+  
+  <div class="buttons-container">
+    <div class="buttons">
+      <button (click)="createOrder()" class="button">Create Order</button>
+    </div>
+  </div>
+</div>

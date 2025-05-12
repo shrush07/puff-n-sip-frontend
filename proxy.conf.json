@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://puff-sip.onrender.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 3rem;
+}
+
+.details {
+  width: 28rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn {
+  color: #ffffff;
+  background: #b08f5c;
+  border: 2px solid #b08f5c;
+  font-size: 1.2rem;
+  padding: 1rem;
+  cursor: pointer;
+  width: 200px;
+}
+.error-list {
+  color: red;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgot-password{
+  color: #b08f5c;
+  cursor: pointer;
+}

@@ -1,0 +1,33 @@
+<div id="pop-items" class="pop-items">
+    <h3 class="pop-title">Favorite Items</h3>
+    <div class="items">
+      <ul class="items item-grid">
+        <li *ngFor="let food of favoriteFoods" class="item">
+          <a [routerLink]="['/food', food?._id]" class="link">
+            <img [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="item-img" />
+          </a>
+          <div class="content">
+            <div class="item-tnp">
+              <div class="name">
+                <a [routerLink]="['/food', food?._id]" class="link pop-sm-title">{{ food.name }}</a>
+              </div>
+              <div class="price">
+                <span class="price">{{ food.price | currency: 'INR' }}</span>
+              </div>
+            </div>
+            <div class="item-btn">
+                <!-- ❤️ Heart Icon placed correctly -->
+                <i class="fa fa-heart"
+                   [class.fa-solid]="food.favorite"
+                   [class.fa-regular]="!food.favorite"
+                   [class.favorite]="true"
+                   (click)="toggleFavorite(food)">
+                </i>
+                <button (click)="addToCart(food)" class="cart-btn">🛒</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
