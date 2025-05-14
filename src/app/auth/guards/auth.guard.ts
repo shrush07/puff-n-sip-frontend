@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { catchError, map, Observable, of } from 'rxjs';
 import { UserService } from '../../services/user.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,19 +17,17 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // Attempt to refresh the token if it's expired
     if (this.userService.isLoggedIn() && this.userService.isTokenExpired()) {
       return this.userService.refreshToken().pipe(
         map(() => true),
         catchError(() => {
-          this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
           return of(false);
         })
       );
     }
 
-    // If not logged in, redirect to login page
-    this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 }

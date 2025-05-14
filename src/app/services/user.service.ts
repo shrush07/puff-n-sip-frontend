@@ -84,11 +84,18 @@ export class UserService {
   }
 
   isTokenExpired(): boolean {
-    const token = this.getToken();
-    if (!token) return true;
+  const token = this.getToken();
+  if (!token) return true;
+
+  try {
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  } catch (e) {
+    console.warn('Invalid token format', e);
+    return true;
   }
+}
+
 
   logout(): void {
     this.userSubject.next(new User());

@@ -24,6 +24,8 @@ export function app(): express.Express {
   console.log(`Proxying API requests to: ${backendUrl}`);
   server.use('/api', proxy(backendUrl));
 
+  
+
   // Middleware for CORS and JSON parsing
   server.use(express.json());
   
