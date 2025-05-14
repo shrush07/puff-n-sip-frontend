@@ -1,0 +1,8 @@
+<div class="user-order-history">
+  <h2>Order History for User: {{ userId }}</h2>
+  <ul>
+    <li *ngFor="let order of orderHistory">
+      Order ID: {{ order.id }} - {{ order.total }} USD - {{ order.date }}
+    </li>
+  </ul>
+</div>

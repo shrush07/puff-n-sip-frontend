@@ -13,6 +13,8 @@ import { PaymentPageComponent } from './components/pages/payment-page/payment-pa
 import { ResetPasswordComponent } from './components/pages/reset-password/reset-password.component';
 import { FavoritesComponent } from './components/pages/favorites/favorites.component';
 
+// Importing Admin Components
+
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AdminGuard } from './auth/guards/admin.guard';
 

@@ -1,0 +1,14 @@
+.user-order-history {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}

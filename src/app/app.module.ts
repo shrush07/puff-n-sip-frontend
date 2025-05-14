@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Import components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { SearchComponent } from './components/partials/search/search.component';
@@ -11,9 +15,6 @@ import { FoodPageComponent } from './components/pages/food-page/food-page.compon
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { TitleComponent } from './components/partials/title/title.component';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputContainerComponent } from './components/partials/input-container/input-container.component';
 import { InputValidationComponent } from './components/partials/input-validation/input-validation.component';
 import { TextInputComponent } from './components/partials/text-input/text-input.component';
@@ -23,29 +24,18 @@ import { RegisterPageComponent } from './components/pages/register-page/register
 import { CheckoutPageComponent } from './components/pages/checkout-page/checkout-page.component';
 import { OrderItemsListComponent } from './components/partials/order-items-list/order-items-list.component';
 import { MapComponent } from './components/partials/map/map.component';
-import { AuthInterceptor } from './auth/auth.interceptor';
 import { MenuPageComponent } from './components/pages/menu-page/menu-page.component';
 import { ContactPageComponent } from './components/pages/contact-page/contact-page.component';
 import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
-import { loadStripe } from '@stripe/stripe-js';
 import { ResetPasswordComponent } from './components/pages/reset-password/reset-password.component';
 import { FavoritesComponent } from './components/partials/favorites/favorites.component';
 
+// Import services
+import { AuthInterceptor } from './auth/auth.interceptor';
 
-
-// export class ResetPasswordComponent {
-//   // ... your component code
-  
-//   constructor(
-//     private userService: UserService,
-//     private route: ActivatedRoute,
-//     private router: Router
-//   ) {
-//     // ... existing constructor code
-//   }
-
-  // ... rest of your component methods
-//}
+// Import third-party modules
+import { ToastrModule } from 'ngx-toastr';
+import { loadStripe } from '@stripe/stripe-js';
 
 @NgModule({
   declarations: [
@@ -79,12 +69,12 @@ import { FavoritesComponent } from './components/partials/favorites/favorites.co
     HttpClientModule,
     ReactiveFormsModule,
     CommonModule,
-    FormsModule,ToastrModule.forRoot({
+    FormsModule,
+    ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       newestOnTop: false
     }),
-    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

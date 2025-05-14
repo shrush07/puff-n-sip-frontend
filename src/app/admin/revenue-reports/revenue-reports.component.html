@@ -1,0 +1,13 @@
+<div class="revenue-reports">
+  <h2>Revenue Reports</h2>
+  <button (click)="getRevenueReports('daily')">Daily</button>
+  <button (click)="getRevenueReports('weekly')">Weekly</button>
+  <button (click)="getRevenueReports('monthly')">Monthly</button>
+  <button (click)="getRevenueReports('yearly')">Yearly</button>
+
+  <div *ngIf="revenueData">
+    <p>Total Revenue: {{ revenueData.revenue }} USD</p>
+    <p>Total Tax: {{ revenueData.tax }} USD</p>
+    <p>Total Delivery Fee: {{ revenueData.deliveryFee }} USD</p>
+  </div>
+</div>

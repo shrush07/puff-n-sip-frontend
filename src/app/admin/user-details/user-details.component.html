@@ -1,0 +1,10 @@
+<div class="user-details">
+  <h2>User Details</h2>
+  <div *ngIf="userDetails">
+    <p>Name: {{ userDetails.name }}</p>
+    <p>Email: {{ userDetails.email }}</p>
+    <p>Address: {{ userDetails.address }}</p>
+    <p>Contact Number: {{ userDetails.contact }}</p>
+    <p>Payment Method: **** **** **** {{ userDetails.paymentMethod.slice(-4) }}</p>
+  </div>
+</div>

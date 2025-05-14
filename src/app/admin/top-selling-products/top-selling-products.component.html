@@ -1,0 +1,13 @@
+<div class="top-selling-products">
+  <h2>Top Selling Products</h2>
+  <div class="range-selection">
+    <button (click)="onRangeChange('weekly')">Weekly</button>
+    <button (click)="onRangeChange('monthly')">Monthly</button>
+    <button (click)="onRangeChange('yearly')">Yearly</button>
+  </div>
+  <ul>
+    <li *ngFor="let product of topProducts">
+      {{ product.name }} - {{ product.sales }} units sold
+    </li>
+  </ul>
+</div>
