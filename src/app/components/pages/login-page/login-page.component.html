@@ -1,9 +1,25 @@
 <div class="container">
   <div class="details">
-    <app-title [title]="isResetPasswordMode ? 'Reset Password' : 'Login'"></app-title>
+    <app-title
+      [title]="isResetPasswordMode ? 'Reset Password' : 'Login'"
+    ></app-title>
 
     <!-- Login Form -->
-    <form *ngIf="!isResetPasswordMode" [formGroup]="loginForm" (ngSubmit)="submit()">
+    <form
+      *ngIf="!isResetPasswordMode"
+      [formGroup]="loginForm"
+      (ngSubmit)="submit()"
+    >
+    
+      <!-- Role selector -->
+      <div class="form-group">
+        <label for="role">Login as</label>
+        <select id="role" formControlName="role" class="form-control logform">
+          <option value="user" class="logop">User</option>
+          <option value="admin" class="logop">Admin</option>
+        </select>
+      </div>
+
       <text-input
         [control]="fc.email"
         [showErrorsWhen]="isSubmitted"
@@ -18,6 +34,7 @@
         label="Password"
       ></text-input>
 
+
       <div class="forgot-password">
         <a (click)="toggleResetPasswordMode()">Forgot Password?</a>
       </div>
@@ -27,13 +44,17 @@
       <div class="register">
         New user? &nbsp;
         <a routerLink="/register" [queryParams]="{ returnUrl: returnUrl }">
-          Register here 
+          Register here
         </a>
       </div>
     </form>
 
     <!-- Reset Password Form -->
-    <form *ngIf="isResetPasswordMode" [formGroup]="resetPasswordForm" (ngSubmit)="requestPasswordReset()">
+    <form
+      *ngIf="isResetPasswordMode"
+      [formGroup]="resetPasswordForm"
+      (ngSubmit)="requestPasswordReset()"
+    >
       <text-input
         [control]="resetFc.email"
         [showErrorsWhen]="isSubmitted"
@@ -41,15 +62,8 @@
         label="Enter your registered Email"
       ></text-input>
 
-      <!-- <text-input
-        [control]="resetFc.newPassword"
-        [showErrorsWhen]="isSubmitted"
-        type="password"
-        label="New Password"
-      ></text-input> -->
-
       <button type="submit" [disabled]="isLoading" class="btn">
-        {{ isLoading ? 'Sending...' : 'Send Link' }}
+        {{ isLoading ? "Sending..." : "Send Link" }}
       </button>
 
       <div class="forgot-password">

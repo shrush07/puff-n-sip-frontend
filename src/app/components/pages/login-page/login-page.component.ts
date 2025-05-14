@@ -3,46 +3,47 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
-    selector: 'app-login-page',
-    templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.css'],
-    standalone: false
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.css'],
+  standalone: false
 })
 export class LoginPageComponent implements OnInit {
-  loginForm!:FormGroup;
+  loginForm!: FormGroup;
   resetPasswordForm!: FormGroup;
   isSubmitted = false;
   returnUrl = '';
-  isLoading: boolean = false;
-
-  // toastrService: any;
-  isResetPasswordMode = false; 
+  isLoading = false;
+  isResetPasswordMode = false;
 
   constructor(
     public formBuilder: FormBuilder,
-     public userService:UserService,
-     public activatedRoute:ActivatedRoute,
-     public router:Router, 
-     private toastrService: ToastrService) { }
+    public userService: UserService,
+    public activatedRoute: ActivatedRoute,
+    public router: Router,
+    private toastrService: ToastrService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    // Initialize login form
     this.loginForm = this.formBuilder.group({
-      email:['', Validators.required], // Removed Validators.email
-      password:['', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      role: ['user', Validators.required] // Added role control with default value 'user'
     });
 
-    // Initialize reset password form
     this.resetPasswordForm = this.formBuilder.group({
-      email: ['', Validators.required], // Removed Validators.email
+      email: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
+
     this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  get fc(){
+  get fc() {
     return this.loginForm.controls;
   }
 
@@ -63,7 +64,8 @@ export class LoginPageComponent implements OnInit {
     this.userService.login(this.loginForm.value).subscribe({
       next: (user) => {
         console.log('Login successful, user:', user);
-        if (user && user.name) { // Check if user and name are defined
+        if (user && user.name && user.token && user.role) {
+          this.authService.login(user.token, user.role);
           this.toastrService.success(`Welcome ${user.name}!`, 'Login Successful');
           const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigateByUrl(returnUrl);
@@ -78,12 +80,12 @@ export class LoginPageComponent implements OnInit {
       }
     });
   }
-  
+
   requestPasswordReset() {
     console.log('Reset password - frontend called');
     this.isSubmitted = true;
     const email = this.resetPasswordForm.get('email')?.value;
-    
+
     if (!email) {
       this.toastrService.error('Email is required.', 'Error');
       return;
@@ -106,4 +108,3 @@ export class LoginPageComponent implements OnInit {
     });
   }
 }
-  

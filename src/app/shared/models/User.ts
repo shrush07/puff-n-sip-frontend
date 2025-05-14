@@ -5,6 +5,7 @@ export class User{
     address!: string;
     token!: string;
     isAdmin!: boolean;
+    role!: 'admin' | 'user';
     postalcode!: string;
     refreshToken !: string;
 }

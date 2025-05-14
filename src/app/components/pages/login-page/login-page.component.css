@@ -39,3 +39,23 @@ form {
   color: #b08f5c;
   cursor: pointer;
 }
+
+.logform{
+  border-radius: 0.7rem;
+}
+
+.logform:hover{
+  background: #b08f5c;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.logop{
+  background: transparent;
+}
+
+.logop:hover{
+  background: #b08f5c;
+  color: #ffffff;
+  cursor: pointer;
+}
