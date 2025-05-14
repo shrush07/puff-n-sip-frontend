@@ -1,4 +1,3 @@
-// admin-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TopSellingProductsComponent } from './top-selling-products/top-selling-products.component';
