@@ -7,30 +7,33 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
+  // Set base URL once for all admin routes
+  private baseUrl = 'https://puff-sip.onrender.com/api/admin'; 
+
   constructor(private http: HttpClient) {}
 
   // Get top-selling products
   getTopSellingProducts(range: string): Observable<any> {
-    return this.http.get<any>(`/api/admin/top-products?range=${range}`);
+    return this.http.get<any>(`${this.baseUrl}/top-products?range=${range}`);
   }
 
   // Get user order history
   getUserOrderHistory(userId: string): Observable<any> {
-    return this.http.get<any>(`/api/admin/users/${userId}/orders`);
+    return this.http.get<any>(`${this.baseUrl}/users/${userId}/orders`);
   }
 
   // Get user details
   getUserDetails(userId: string): Observable<any> {
-    return this.http.get<any>(`/api/admin/users/${userId}`);
+    return this.http.get<any>(`${this.baseUrl}/users/${userId}`);
   }
 
   // Get revenue reports
   getRevenueReports(range: string): Observable<any> {
-    return this.http.get<any>(`/api/admin/revenue?range=${range}`);
+    return this.http.get<any>(`${this.baseUrl}/revenue?range=${range}`);
   }
 
   // Get dashboard overview
   getDashboardOverview(): Observable<any> {
-    return this.http.get<any>('/api/admin/overview');
+    return this.http.get<any>(`${this.baseUrl}/overview`);
   }
 }

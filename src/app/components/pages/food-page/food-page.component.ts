@@ -39,16 +39,13 @@ export class FoodPageComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-    const backendUrl = window.location.hostname === 'localhost' 
-      ? 'http://localhost:5000' 
-      : 'https://puff-sip.onrender.com';
-  
-    // Remove 'assets/images/' or 'assets/' if present at the start of the path
-    const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
-  
-    // Return the URL without the 'assets/images/' prefix
-    return `${backendUrl}/images/${cleanedFileName}`;
-  }
+  const isFullUrl = imageFileName.startsWith('http') || imageFileName.startsWith('https');
+  const backendUrl = isFullUrl ? '' : (window.location.hostname === 'localhost' 
+      ? 'https://puff-sip.onrender.com' 
+      : 'http://localhost:5000');
+
+  return isFullUrl ? imageFileName : `${backendUrl}/${imageFileName.replace(/^assets\//, '')}`;
+}
 
   addToCart(){
     console.log("foodid",this.food);

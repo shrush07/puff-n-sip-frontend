@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 // Define an interface for the contact form data
 export interface ContactFormData {
@@ -13,7 +14,8 @@ export interface ContactFormData {
   providedIn: 'root',
 })
 export class ContactService {
-  private readonly CONTACT_URL = '/api/contact';
+  // Use base API URL from environment configuration
+  private readonly CONTACT_URL = `${environment.apiUrl}/api/contact`;
 
   constructor(private http: HttpClient) {}
 

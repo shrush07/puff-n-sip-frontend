@@ -5,6 +5,7 @@ import { Food } from '../../../shared/models/Food';
 import { CartService } from '../../../services/cart.service';
 import { NgForm } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -47,7 +48,8 @@ export class HomeComponent implements OnInit {
     private foodService: FoodService,
     private activatedRoute: ActivatedRoute,
     private cartService: CartService,
-    private contactService: ContactService
+    private contactService: ContactService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -98,7 +100,7 @@ export class HomeComponent implements OnInit {
       ? 'https://puff-sip.onrender.com' 
       : 'http://localhost:5000');
 
-  return isFullUrl ? imageFileName : `${backendUrl}/images/${imageFileName.replace(/^assets\//, '')}`;
+  return isFullUrl ? imageFileName : `${backendUrl}/${imageFileName.replace(/^assets\//, '')}`;
 }
 
   
@@ -128,12 +130,14 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         this.messageSent = true;
         this.errorMessage = '';
+        this.toastr.success('Message sent successfully!');
         form.resetForm();
         console.log('Contact form submitted successfully:', res);
       },
       error: (err) => {
         this.messageSent = false;
-        this.errorMessage = err?.error?.message || 'Submission failed. Please try again.';
+        const message = err?.error?.message || 'Submission failed. Please try again.';
+        this.toastr.error(message);
         console.error('Error submitting contact form:', err);
       },
     });
