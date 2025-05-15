@@ -1,6 +1,11 @@
 .top-selling-products {
   padding: 20px;
-  background-color: #f9f9f9;
+  margin-left: 260px;
+  font-family: 'Dancing Script';
+  font-size: 16px;
+  text-decoration: none;
+  color: #b08f5c;
+  
 }
 
 .range-selection {
@@ -19,4 +24,49 @@ ul {
 li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
+}
+
+.option{
+  font-size: 16px;
+  font-family: 'Archivo';
+  color: #49340d;
+  margin-bottom: 1%;
+  margin: 10px 0;
+}
+
+.option:hover{
+  color: #fff;
+  background: #b08f5c;
+  cursor: pointer;
+}
+
+.info{
+  font-size: 16px;
+  font-family: 'Archivo';
+  color: #b08f5c;
+  margin-bottom: 1%;
+  margin: 10px 0;
+
+}
+
+.top-products {
+max-width: 800px;
+margin: 0 auto;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 1rem;
+}
+
+th, td {
+border: 1px solid #ccc;
+padding: 8px;
+text-align: left;
+}
+
+select {
+margin-top: 10px;
+padding: 5px;
 }

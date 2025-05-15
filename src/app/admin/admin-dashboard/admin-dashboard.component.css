@@ -7,6 +7,10 @@
   color: #b08f5c;
 }
 
-p {
+.info{
+  font-size: 16px;
+  font-family: 'Archivo';
+  color: #b08f5c;
+  margin-bottom: 1%;
   margin: 10px 0;
 }

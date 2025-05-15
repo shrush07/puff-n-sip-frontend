@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../services/admin.service';
+import { AdminService } from '../services/admin.service';
+import { TopProduct } from '../models/product.model';
 
 @Component({
   selector: 'app-top-selling-products',
@@ -8,8 +9,9 @@ import { AdminService } from '../../services/admin.service';
   standalone: false
 })
 export class TopSellingProductsComponent implements OnInit {
-  topProducts: any[] = [];
-  selectedRange: string = 'monthly'; // Default range
+  
+  topProducts: TopProduct[] = [];
+  selectedRange: 'weekly' | 'monthly' | 'yearly' = 'weekly';
 
   constructor(private adminService: AdminService) {}
 
@@ -19,12 +21,11 @@ export class TopSellingProductsComponent implements OnInit {
 
   getTopSellingProducts(): void {
     this.adminService.getTopSellingProducts(this.selectedRange).subscribe(data => {
-      this.topProducts = data;
+    this.topProducts = data;
     });
   }
 
-  onRangeChange(range: string): void {
-    this.selectedRange = range;
-    this.getTopSellingProducts();
-  }
+  fetchTopProducts(range: 'weekly' | 'monthly' | 'yearly') {
+  console.log('Fetching top products for:', range);
+}
 }

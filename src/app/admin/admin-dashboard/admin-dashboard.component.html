@@ -1,9 +1,9 @@
 <div class="admin-dashboard">
   <h2>Dashboard Overview</h2>
   <div *ngIf="dashboardData">
-    <p>Total Users: {{ dashboardData.users }}</p>
-    <p>Total Orders: {{ dashboardData.orders }}</p>
-    <p>Live Orders: {{ dashboardData.liveOrders }}</p>
-    <p>Cancelled Orders: {{ dashboardData.cancelledOrders }}</p>
+    <p class="info">Total Users: {{ dashboardData.users }}</p>
+    <p class="info">Total Orders: {{ dashboardData.orders }}</p>
+    <p class="info">Live Orders: {{ dashboardData.liveOrders }}</p>
+    <p class="info">Cancelled Orders: {{ dashboardData.cancelledOrders }}</p>
   </div>
 </div>

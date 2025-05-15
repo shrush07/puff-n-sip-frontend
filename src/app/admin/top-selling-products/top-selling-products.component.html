@@ -1,13 +1,26 @@
 <div class="top-selling-products">
   <h2>Top Selling Products</h2>
-  <div class="range-selection">
-    <button (click)="onRangeChange('weekly')">Weekly</button>
-    <button (click)="onRangeChange('monthly')">Monthly</button>
-    <button (click)="onRangeChange('yearly')">Yearly</button>
-  </div>
-  <ul>
-    <li *ngFor="let product of topProducts">
-      {{ product.name }} - {{ product.sales }} units sold
-    </li>
-  </ul>
+  <select [(ngModel)]="selectedRange" (change)="fetchTopProducts(selectedRange)" class="option">
+    <option value="weekly" class="option">Weekly</option>
+    <option value="monthly" class="option">Monthly</option>
+    <option value="yearly" class="option">Yearly</option>
+  </select>
+
+  <table *ngIf="topProducts.length">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity Sold</th>
+        <th>Total Revenue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of topProducts">
+        <td>{{ product.name }}</td>
+        <td>{{ product.totalSold }}</td>
+        <td>${{ product.totalRevenue.toFixed(2) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!topProducts.length" class="info">No data available for this range.</p>
 </div>

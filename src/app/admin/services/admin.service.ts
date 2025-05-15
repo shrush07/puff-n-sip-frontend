@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TopProduct } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   // Get top-selling products
-  getTopSellingProducts(range: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/top-products?range=${range}`);
+  getTopSellingProducts(range: 'weekly' | 'monthly' | 'yearly'): Observable<any> {
+    return this.http.get<TopProduct[]>(`${this.baseUrl}/top-products?range=${range}`);
   }
 
   // Get user order history

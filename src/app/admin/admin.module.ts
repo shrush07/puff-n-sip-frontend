@@ -8,6 +8,8 @@ import { TopSellingProductsComponent } from './top-selling-products/top-selling-
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminService } from './services/admin.service';
+import { FormsModule } from '@angular/forms'; 
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
-  ]
+    AdminRoutingModule,
+    FormsModule
+  ],
+  providers: [AdminService]
 })
 export class AdminModule { }
