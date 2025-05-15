@@ -8,7 +8,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 
 const routes: Routes = [
   { path: '', component: AdminDashboardComponent }, // default admin route
-  { path: 'top-selling-products', component: TopSellingProductsComponent },
+  { path: 'top-products', component: TopSellingProductsComponent },
   { path: 'user-order-history/:userId', component: UserOrderHistoryComponent },
   { path: 'revenue-reports', component: RevenueReportsComponent },
   { path: 'user-details', component: UserDetailsComponent }
