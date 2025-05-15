@@ -1,37 +1,63 @@
-<div class="contact">
-    <h3 class="pop-title">Contact</h3>
 
+  <div class="contact">
     <div class="address">
       <h3 class="con-head">Vadodara</h3>
       <p class="contact-p">
-        GF-36, Florence Excellence, Vasna - Bhayli Main Rd, Bhayli, Vadodara,
-        Gujarat 390015, India
+        GF-36, Florence Excellence, Vasna - Bhayli Main Rd, Bhayli, Vadodara, Gujarat 390015, India
       </p>
       <a href="tel:8980492630" class="call">+91 89804 92630</a>
     </div>
+
     <div class="form">
-      <form id="contact-form" onSubmit="{handleSubmit}">
-        <!-- <Form id="contact-form" (submit)="register()" (ngSubmit)="onSubmit()" #contactForm="ngForm"> -->
-        <div class="con-row">
-          <div class="cn-col">
-            <input for="name" id="name" name="name" type="text" class="form-control" placeholder="Name" autocomplete="name" required />
-          </div>
-          <div class="cn-col">
-            <input name="email" id="email" name="email" type="text" class="form-control" placeholder="Email" autocomplete="email" required />
-          </div>
-          <div class="cn-col">
-            <input  name="ratings" id="ratings" name="ratings" type="text" class="form-control" placeholder="Ratings out of 10" autocomplete="off" required  />
-          </div>
-          <div class="cn-col">
-            <input name="phone" id="tel" name="tel" type="tel" maxLength="10" class="form-control" placeholder="Contact Number" autocomplete="tel" required />
-          </div>
-          <div class="cn-row">
-            <textarea name="message" id="message" name="message" class="form-control" rows="5" placeholder="Write a Review..." spellCheck="false" autocomplete="off" required ></textarea>
+    <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
+      <div class="con-row">
+
+        <div class="cn-col">
+          <input type="text" name="name" ngModel class="form-control" placeholder="Name" required #name="ngModel" />
+          <div *ngIf="name.invalid && name.touched" class="error-msg">
+            Name is required.
           </div>
         </div>
-        <p class="co-p">
-          <Button id="submit-btn" class="button" type="submit">SEND</Button>
-        </p>
-      </form>
-    </div>
+
+        <div class="cn-col">
+          <input type="email" name="email" ngModel class="form-control" placeholder="Email" required email #email="ngModel" />
+          <div *ngIf="email.invalid && email.touched" class="error-msg">
+            Please enter a valid email.
+          </div>
+        </div>
+
+        <div class="cn-col">
+          <input type="number" name="ratings" ngModel class="form-control" placeholder="Ratings out of 10" required min="0" max="10" #ratings="ngModel" />
+          <div *ngIf="ratings.invalid && ratings.touched" class="error-msg">
+            Please enter a rating between 0 and 10.
+          </div>
+        </div>
+
+        <div class="cn-col">
+          <input type="tel" name="phone" ngModel class="form-control" placeholder="Contact Number" maxlength="10" required pattern="^[0-9]{10}$" #phone="ngModel"/>
+          <div *ngIf="phone.invalid && phone.touched" class="error-msg">
+            Please enter a valid 10-digit phone number.
+          </div>
+        </div>
+
+        <div class="cn-row">
+          <textarea name="message" ngModel class="form-control" rows="5" placeholder="Write a Review..." required #message="ngModel"></textarea>
+          <div *ngIf="message.invalid && message.touched" class="error-msg">
+            Message is required.
+          </div>
+        </div>
+
+      </div>
+
+      <p *ngIf="messageSent" class="success-msg">Message sent successfully!</p>
+      <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+
+      <p class="co-p">
+        <button id="submit-btn" class="button" type="submit" [disabled]="contactForm.invalid">
+          SUBMIT
+        </button>
+      </p>
+    </form>
+  </div>
+
   </div>

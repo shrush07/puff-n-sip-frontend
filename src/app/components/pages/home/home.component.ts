@@ -3,6 +3,8 @@ import { FoodService } from '../../../services/food.service';
 import { ActivatedRoute } from '@angular/router';
 import { Food } from '../../../shared/models/Food';
 import { CartService } from '../../../services/cart.service';
+import { NgForm } from '@angular/forms';
+import { ContactService } from '../../../services/contact.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,9 @@ export class HomeComponent implements OnInit {
   foods: Food[] = [];
   currentStartIndex: number = 0; 
   visibleCount: number = 4;
+  http: any;
+  messageSent = false;
+  errorMessage = '';
 
   aboutCards = [
     {
@@ -41,7 +46,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private foodService: FoodService,
     private activatedRoute: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService,
+    private contactService: ContactService
   ) {}
 
   ngOnInit(): void {
@@ -87,20 +93,14 @@ export class HomeComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-    console.log('Received Image File Name:', imageFileName);  // Debug log
-  
-    const isFullUrl = imageFileName.startsWith('http') || imageFileName.startsWith('https');
-    
-    const backendUrl = isFullUrl ? '' : (window.location.hostname === 'localhost' 
-        ? 'http://localhost:5000' 
-        : 'https://puff-sip.onrender.com');
-    
-    if (isFullUrl) {
-      return imageFileName;
-    }
-  
-    return `${backendUrl}/images/${imageFileName}`;
-  }
+  const isFullUrl = imageFileName.startsWith('http') || imageFileName.startsWith('https');
+  const backendUrl = isFullUrl ? '' : (window.location.hostname === 'localhost' 
+      ? 'https://puff-sip.onrender.com' 
+      : 'http://localhost:5000');
+
+  return isFullUrl ? imageFileName : `${backendUrl}/images/${imageFileName.replace(/^assets\//, '')}`;
+}
+
   
 
   toggleFavorite(food: Food): void {
@@ -120,4 +120,24 @@ export class HomeComponent implements OnInit {
       error: (error) => console.error('Cart error:', error),
     });
   }
+
+  onSubmit(form: NgForm): void {
+    if (form.invalid) return;
+
+    this.contactService.submitContactForm(form.value).subscribe({
+      next: (res) => {
+        this.messageSent = true;
+        this.errorMessage = '';
+        form.resetForm();
+        console.log('Contact form submitted successfully:', res);
+      },
+      error: (err) => {
+        this.messageSent = false;
+        this.errorMessage = err?.error?.message || 'Submission failed. Please try again.';
+        console.error('Error submitting contact form:', err);
+      },
+    });
+  }
+
 }
+

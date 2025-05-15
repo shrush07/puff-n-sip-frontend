@@ -35,6 +35,7 @@ export function app(): express.Express {
       index: false,
     })
   );
+  
 
   // Websocket closure
   const wsClient = new WebSocket('ws://localhost:5000');

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ContactService } from '../../../services/contact.service';
 
 @Component({
     selector: 'app-contact-page',
@@ -11,33 +13,29 @@ import { Component } from '@angular/core';
 
 export class ContactPageComponent {
 
-  handleSubmit = async(e:any) =>{
-    // e.preventDefault();
+  http: any;
+  messageSent = false;
+  errorMessage = '';
 
-    try {
-      const response = await fetch("http://puff-n-sip.netlify.app/api/form/contact", {
-        method:"POST",
-        headers: {
-          "Content-Type": "application/json"
+  constructor(
+      private contactService: ContactService
+    ) {}
+
+   onSubmit(form: NgForm): void {
+      if (form.invalid) return;
+  
+      this.contactService.submitContactForm(form.value).subscribe({
+        next: (res) => {
+          this.messageSent = true;
+          this.errorMessage = '';
+          form.resetForm();
+          console.log('Contact form submitted successfully:', res);
         },
-        body: JSON.stringify({
-          name: e.target.name.value,
-          email: e.target.email.value,
-          ratings: e.target.ratings.value,
-          contact: e.target.contact.value,
-          message: e.target.message.value
-        })
+        error: (err) => {
+          this.messageSent = false;
+          this.errorMessage = err?.error?.message || 'Submission failed. Please try again.';
+          console.error('Error submitting contact form:', err);
+        },
       });
-
-      if(response.ok){
-        const data = await response.json();
-        console.log(data);
-        alert("Message sent successfully");
-        e.target.reset();
-      }
-
-    } catch (error) {
-      console.log(error);
     }
-  }
 }
