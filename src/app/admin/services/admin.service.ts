@@ -14,8 +14,8 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   // Get top-selling products
-  getTopSellingProducts(range: 'weekly' | 'monthly' | 'yearly'): Observable<any> {
-    return this.http.get<TopProduct[]>(`${this.baseUrl}/top-products?range=${range}`);
+  getTopSellingProducts(range: 'weekly' | 'monthly' | 'yearly'): Observable<TopProduct[]> {
+  return this.http.get<TopProduct[]>(`/api/admin/top-products?range=${range}`);
   }
 
   // Get user order history

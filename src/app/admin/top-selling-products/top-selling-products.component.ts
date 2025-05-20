@@ -9,23 +9,28 @@ import { TopProduct } from '../models/product.model';
   standalone: false
 })
 export class TopSellingProductsComponent implements OnInit {
-  
+
   topProducts: TopProduct[] = [];
   selectedRange: 'weekly' | 'monthly' | 'yearly' = 'weekly';
 
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
-    this.getTopSellingProducts();
+    this.fetchTopProducts(this.selectedRange);
   }
 
-  getTopSellingProducts(): void {
-    this.adminService.getTopSellingProducts(this.selectedRange).subscribe(data => {
-    this.topProducts = data;
+  // ✅ Fetches top products from backend
+  fetchTopProducts(range: 'weekly' | 'monthly' | 'yearly'): void {
+    this.selectedRange = range;
+    console.log('Fetching top products for:', range);
+    this.adminService.getTopSellingProducts(range).subscribe({
+      next: (data) => {
+        this.topProducts = data;
+        console.log('Top products:', data);
+      },
+      error: (err) => {
+        console.error('Error fetching top products:', err);
+      }
     });
   }
-
-  fetchTopProducts(range: 'weekly' | 'monthly' | 'yearly') {
-  console.log('Fetching top products for:', range);
-}
 }
