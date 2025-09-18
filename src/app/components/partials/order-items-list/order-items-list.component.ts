@@ -18,15 +18,13 @@ export class OrderItemsListComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-    const backendUrl = window.location.hostname === 'localhost' 
-      ? 'http://localhost:5000' 
-      : 'https://puff-sip.onrender.com';
-  
-    // Remove 'assets/images/' or 'assets/' if present at the start of the path
-    const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
-  
-    // Return the URL without the 'assets/images/' prefix
-    return `${backendUrl}/images/${cleanedFileName}`;
-  }
+  const isFullUrl = imageFileName.startsWith('http');
+  const backendUrl = isFullUrl 
+    ? '' 
+    : (window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000' 
+        : 'https://puff-sip.onrender.com');
+  return isFullUrl ? imageFileName : `${backendUrl}/images/${imageFileName}`;
+}
 
 }

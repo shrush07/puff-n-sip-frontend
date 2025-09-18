@@ -88,20 +88,12 @@ export class CheckoutPageComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-    // Check if the imageFileName is already a full URL
-    if (imageFileName.startsWith('http://') || imageFileName.startsWith('https://')) {
-      return imageFileName;
-    }
-
-    // Determine the backend URL based on the environment
-    const backendUrl = window.location.hostname === 'localhost' 
-      ? 'https://puff-sip.onrender.com' 
-      : 'http://localhost:5000';
-
-    // Clean the imageFileName by removing any leading paths
-    const cleanedFileName = imageFileName.replace(/^assets\/images\//, '').replace(/^assets\//, '');
-
-    // Construct and return the full image URL
-    return `${backendUrl}/${cleanedFileName}`;
-  }
+  const isFullUrl = imageFileName.startsWith('http');
+  const backendUrl = isFullUrl 
+    ? '' 
+    : (window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000' 
+        : 'https://puff-sip.onrender.com');
+  return isFullUrl ? imageFileName : `${backendUrl}/images/${imageFileName}`;
+}
 }

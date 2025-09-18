@@ -41,7 +41,7 @@ export class CartPageComponent implements OnInit {
   }
 
   removeFromCart(cartItem: CartItem): void {
-    this.cartService.removeFromCart(cartItem.food._id);
+  this.cartService.removeFromCart(cartItem.food._id);
   }
 
   changeQuantity(cartItem: CartItem, quantityInString: string): void {
