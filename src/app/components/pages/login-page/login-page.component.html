@@ -5,37 +5,31 @@
     ></app-title>
 
     <!-- Login Form -->
-    <form
-      *ngIf="!isResetPasswordMode" [formGroup]="loginForm" (ngSubmit)="submit()"
-    >
-    
+    <form *ngIf="!isResetPasswordMode" [formGroup]="loginForm" (ngSubmit)="submit()">
       <!-- Role selector -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="role">Login as</label>
         <select id="role" formControlName="role" class="form-control logform">
           <option value="user" class="logop">User</option>
           <option value="admin" class="logop">Admin</option>
         </select>
-      </div>
+      </div> -->
 
-      <text-input
-        [control]="fc.email" [showErrorsWhen]="isSubmitted" type="text" label="Email">
-      </text-input>
+      <!-- Email input -->
+      <text-input [control]="fc.email" [showErrorsWhen]="isSubmitted" type="text" label="Email"></text-input>
 
-      <text-input
-        [control]="fc.password" [showErrorsWhen]="isSubmitted" type="password" label="Password">
-      </text-input>
-
+      <!-- Password input with autocomplete fix -->
+      <text-input [control]="fc.password" [showErrorsWhen]="isSubmitted" type="password" label="Password" autocomplete="current-password"></text-input>
 
       <div class="forgot-password">
         <a (click)="toggleResetPasswordMode()">Forgot Password?</a>
       </div>
 
-      <button class="btn">Login</button>
+      <button type="submit" class="btn">Login</button>
 
       <div class="register">
         New user? &nbsp;
-        <a routerLink="/register" [queryParams]="{ returnUrl: returnUrl }">
+        <a routerLink="/register" class="register-link" [queryParams]="{ returnUrl: returnUrl }">
           Register here
         </a>
       </div>

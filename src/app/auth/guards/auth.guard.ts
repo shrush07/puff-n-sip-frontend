@@ -13,11 +13,14 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.userService.isLoggedIn() && !this.userService.isTokenExpired()) {
+    const token = this.userService.getToken();
+    const isExpired = this.userService.isTokenExpired();
+
+    if (token && !isExpired) {
       return true;
     }
 
-    if (this.userService.isLoggedIn() && this.userService.isTokenExpired()) {
+    if (token && isExpired) {
       return this.userService.refreshToken().pipe(
         map(() => true),
         catchError(() => {
@@ -27,7 +30,7 @@ export class AuthGuard implements CanActivate {
       );
     }
 
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
+  this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+  return false;
   }
 }

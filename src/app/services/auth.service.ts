@@ -7,7 +7,10 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    const userJson = localStorage.getItem('User');
+    if (!userJson) return false;
+    const user = JSON.parse(userJson);
+    return !!user?.id; // Logged in if user has id
   }
 
   login(token: string, role: 'admin' | 'user') {

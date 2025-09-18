@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-page',
@@ -24,13 +25,15 @@ export class LoginPageComponent implements OnInit {
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService,
     private toastrService: ToastrService,
     private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.initializeForms();
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.returnUrl = params['returnUrl'] || '/';
+    });
   }
 
   private initializeForms() {
@@ -59,33 +62,58 @@ export class LoginPageComponent implements OnInit {
     this.isSubmitted = false;
   }
 
-  submit() {
+  submit(): void {
   this.isSubmitted = true;
-  if (this.loginForm.invalid) return;
-  console.log('Login form submitted');
 
-  this.userService.login(this.loginForm.value).subscribe({
+  if (this.loginForm.invalid) {
+    console.warn('Login form is invalid');
+    return;
+  }
+
+  const loginData = {
+    email: this.fc.email.value,
+    password: this.fc.password.value,
+    role: this.fc.role.value
+  };
+
+  console.log('Attempting login with:', loginData);
+
+  this.userService.login(loginData).subscribe({
     next: (user) => {
-      // Normalize user.role from isAdmin
-      if (user && user.isAdmin !== undefined && !user.role) {
-        user.role = user.isAdmin ? 'admin' : 'user';
+      console.log('Login response from backend:', user);
+
+      // 1️⃣ Ensure token exists
+      if (user.token && user.refreshToken) {
+        console.log('Tokens received from backend:', {
+          token: user.token,
+          refreshToken: user.refreshToken
+        });
+
+        // 2️⃣ Save tokens to localStorage & update BehaviorSubject
+        this.userService.setTokens(user.token, user.refreshToken);
+
+        console.log('Token in localStorage after setTokens():', localStorage.getItem('token'));
+      } else {
+        console.warn('Login response missing token or refreshToken');
       }
 
-      console.log('Login successful, received user:', user);
+      // 3️⃣ Save full user object in localStorage
+      this.userService.setUserToLocalStorage(user);
+      console.log('User saved in localStorage:', JSON.parse(localStorage.getItem('User') || '{}'));
 
-      if (user && user.name && user.token && (user.role === 'admin' || user.role === 'user')) {
-        this.authService.login(user.token, user.role);
-        this.toastrService.success(`Welcome ${user.name}!`, 'Login Successful');
-        const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
-        this.router.navigateByUrl(returnUrl);
+      // 4️⃣ Redirect logic
+      const returnUrl = this.returnUrl || '/';
+      if (user.isAdmin && loginData.role === 'admin') {
+        console.log('Redirecting to admin dashboard...');
+        this.router.navigateByUrl('/admin-dashboard');
       } else {
-        console.error('User data incomplete. Missing: role');
-        this.toastrService.error('Login successful but user data is incomplete.', 'Error');
+        console.log('Redirecting to returnUrl:', returnUrl);
+        this.router.navigateByUrl(returnUrl);
       }
     },
-    error: (errorResponse) => {
-      console.error('Login failed:', errorResponse);
-      this.toastrService.error(errorResponse.error || 'Login Failed', 'Error');
+    error: (err: any) => {
+      console.error('Login failed:', err);
+      this.toastrService.error(err.error?.message || 'Login failed', 'Error');
     }
   });
 }
@@ -101,7 +129,7 @@ export class LoginPageComponent implements OnInit {
     const email = this.resetFc['email'].value;
 
     if (!email) {
-      this.toastr.error('Email is required.', 'Error');
+      this.toastrService.error('Email is required.', 'Error');
       return;
     }
 
@@ -110,14 +138,14 @@ export class LoginPageComponent implements OnInit {
 
     this.userService.requestPasswordReset(email).subscribe({
       next: () => {
-        this.toastr.success('Password reset link sent to your email.', 'Success');
+        this.toastrService.success('Password reset link sent to your email.', 'Success');
         this.toggleResetPasswordMode();
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Password reset request error:', error);
         const message = error.error?.message || 'Password reset failed';
-        this.toastr.error(message, 'Error');
+        this.toastrService.error(message, 'Error');
         this.isLoading = false;
       }
     });

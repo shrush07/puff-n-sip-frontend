@@ -64,6 +64,51 @@ p{
     text-decoration: underline;
 }
 
+.scroller-container { 
+  background-color: #ffffff; 
+  width: 100vw; 
+  overflow: hidden;
+  white-space: nowrap;
+  /* padding: 25px 0; */
+  margin-left: 260px;
+  position: relative;
+}
+
+
+.scroller-content {
+  display: flex;
+  width: fit-content;
+  animation: scrollText 15s linear infinite;
+  color: #49340d;
+}
+
+.scroll-content {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  flex-shrink: 0;
+  font-size: 32px;
+}
+
+/* Infinite scroll animation */
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Define the keyframes for the animation */
+@keyframes horizontal-scroll {
+    0% {
+        transform: translateX(0%); /* Start at the beginning */
+    }
+    100% {
+        transform: translateX(-100%); /* Move to the left by 100% of its own width */
+    }
+}
+
 /*----Popular Items----*/
 
 .pop-items{
@@ -414,4 +459,42 @@ textarea{
   color: red;
   font-weight: bold;
   margin-top: 10px;
+}
+
+/*---- Media Queries Section ----*/
+@media only screen and (max-width: 768px){
+    
+}
+@media only screen and (max-width:600px){
+    .string-wrapper .static-string{
+        font-size: 30px;
+    }
+    .typed-strings li{
+        font-size: 30px;
+    }
+    .intro-p{
+        font-size: 20px;
+    }
+    .ab-container,.sr-container, .re-container, .pr-container, .cn-container{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .lbl{
+        padding: 0.6rem 0.5rem;
+    }
+    .filters label{
+        padding: 0.5rem 0.2rem;
+    }
+    .ab-cdetails{
+        padding-left: 0;
+    }
+    .edu-d{
+        height: 5rem;
+    }
+    .edu-sec{
+        flex-direction: column-reverse;
+    }
+    .cn-col{
+        width: 100%;
+    }
 }

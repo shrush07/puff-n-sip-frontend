@@ -39,8 +39,9 @@
     <div class="total-price">{{cart.totalPrice|currency: 'INR'}}</div>
 </div>
 
-  <button class="button">
-    <a routerLink="/checkout" class="btn-link">Proceed to Checkout</a>
+  <button class="button" (click)="goToCheckout()">
+    Proceed to Checkout
   </button>
+
 </div>
 </div>
