@@ -19,6 +19,7 @@ export class AppComponent {
 
   private faviconIndex = 0;
   private icons = [
+    'assets/icons/favicon.ico',
     'assets/icons/favicon1.png',
     'assets/icons/favicon2.png',
     'assets/icons/favicon3.png',
