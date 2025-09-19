@@ -50,10 +50,12 @@ export class CartPageComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-    const isFullUrl = imageFileName.startsWith('http') || imageFileName.startsWith('https');
-    const backendUrl = isFullUrl ? '' : (window.location.hostname === 'localhost' 
-      ? 'https://puff-sip.onrender.com' 
-      : 'http://localhost:5000');
-    return isFullUrl ? imageFileName : `${backendUrl}/${imageFileName.replace(/^assets\//, '')}`;
-  }
+  const isFullUrl = imageFileName.startsWith('http');
+  const backendUrl = isFullUrl 
+    ? '' 
+    : (window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000' 
+        : 'https://puff-sip.onrender.com');
+  return isFullUrl ? imageFileName : `${backendUrl}/images/${imageFileName}`;
+}
 }

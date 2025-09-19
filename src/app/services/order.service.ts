@@ -43,18 +43,32 @@ export class OrderService {
       'Content-Type': 'application/json'
     });
     console.log('Token being sent:', token);
-    
 
     if (!token || this.isTokenExpired(token)) {
       console.error('Token is invalid or expired before order creation');
       return throwError(() => new Error('Invalid or expired token'));
     }
     
+    // Calculate totalPrice if not set
+    if (!order.totalPrice || order.totalPrice <= 0) {
+      order.totalPrice = order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    }
+
+    // Ensure orderType is set
+    if (!order.orderType) {
+      order.orderType = 'online'; // default
+    }
+
     console.log('Order payload:', order);
     
     if (!order.name || !order.address || !order.items || order.items.length === 0) {
       console.error('Validation failed: Missing required fields', { order });
       return throwError(() => new Error('All fields are required'));
+    }
+
+    // Also ensure imageUrl exists
+    if (!order.imageUrl) {
+      order.imageUrl = order.items[0]?.food?.imageUrl || 'default.jpg';
     }
 
     return this.http.post<Order>(ORDER_CREATE_URL, order, { headers }).pipe(
@@ -78,13 +92,10 @@ export class OrderService {
       return throwError(() => new Error('Invalid or expired token'));
     }
 
-    // const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    
     return this.http.get<Order>(ORDER_NEW_FOR_CURRENT_USER_URL, { headers }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error creating order:', error);
-        // Don't logout automatically
-        return throwError(() => error); // Return the actual error
+        return throwError(() => error);
       })
     );
   }
@@ -100,22 +111,9 @@ export class OrderService {
     );
   }
   
-  // updateOrder(orderId: string, orderData: Order): Observable<Order> {
-  //   const token = this.userService.getToken();
-  //   const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-  
-  //   return this.http.put<Order>(`${ORDER_UPDATE_URL}/${orderId}`, orderData, { headers }).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       console.error('Error updating order:', error);
-  //       return throwError(() => error);
-  //     })
-  //   );
-  // }
-  
   getLatestOrder(): Observable<Order> {
     return this.http.get<Order>(ORDER_LATEST_URL);
   }
-  
 
   pay(paymentId: string): Observable<{ message: string; orderId: string }> {
     const headers = this.getAuthHeaders();

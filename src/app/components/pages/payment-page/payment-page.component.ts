@@ -153,23 +153,31 @@ export class PaymentPageComponent implements OnInit,  AfterViewInit {
   
   // Handle success after payment confirmation
   paymentSuccess(paymentIntent: any): void {
-    console.log('Payment Intent:', paymentIntent);
-    console.log('Order ID:', this.order._id);
-    
-    const payload = { orderId: this.order._id, paymentId: paymentIntent.id };
-    
-    if (!payload.orderId || !payload.paymentId) {
+  console.log('Payment Intent:', paymentIntent);
+  console.log('Order ID:', this.order._id);
+  
+  const payload = { orderId: this.order._id, paymentId: paymentIntent.id };
+  
+  if (!payload.orderId || !payload.paymentId) {
     console.error('Invalid payload:', payload);
     this.toastrService.error('Invalid order or payment information.');
     return;
-    }
-    
-    this.http.post('/api/orders/payment/success', payload).subscribe(
-    () => {
-       this.cartService.clearCart();
-      }
-    );
   }
+  
+  this.http.post('/api/orders/payment/success', payload).subscribe(
+    () => {
+      this.cartService.clearCart();
+      this.toastrService.success('Payment successful! Redirecting to home...');
+      
+      // Redirect to home page
+      this.router.navigate(['/']); // <-- Add this
+    },
+    (error) => {
+      console.error('Error confirming payment success:', error);
+      this.toastrService.error('Something went wrong after payment.');
+    }
+  );
+}
 
 
   // Placeholder for the order image URL
