@@ -1,0 +1,26 @@
+<div class="settings-container">
+  <h2 class="settings-header">Settings</h2>
+  <form [formGroup]="settingsForm" (ngSubmit)="updateSettings()" class="settings-card">
+    <label class="settings-card">
+      Name:
+      <input formControlName="name" type="text" />
+    </label>
+    <label class="settings-card">
+      Email:
+      <input formControlName="email" type="email" />
+    </label>
+    <label class="settings-card">
+      Address:
+      <input formControlName="address" type="text" />
+    </label>
+    <label class="settings-card">
+      Phone:
+      <input formControlName="phone" type="text" />
+    </label>
+    <label class="settings-card">
+      Password:
+      <input formControlName="password" type="password" placeholder="Leave blank to keep current" />
+    </label>
+    <button type="submit" [disabled]="settingsForm.invalid">Save Changes</button>
+  </form>
+</div>

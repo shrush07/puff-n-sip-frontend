@@ -301,6 +301,7 @@ p{
 .tag{
     margin-left: 260px;
     height: 600px;
+    overflow: hidden;
 }
 
 /*----Contact----*/

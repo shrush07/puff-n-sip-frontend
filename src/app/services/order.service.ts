@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { ORDER_CREATE_URL, ORDER_NEW_FOR_CURRENT_USER_URL, ORDER_UPDATE_URL, ORDER_PAY_URL, ORDER_TRACK_URL, ORDER_BY_ID_URL, ORDER_LATEST_URL } from '../shared/constants/urls';
+import { ORDER_CREATE_URL, ORDER_NEW_FOR_CURRENT_USER_URL, ORDER_UPDATE_URL, ORDER_PAY_URL, ORDER_TRACK_URL, ORDER_BY_ID_URL, ORDER_LATEST_URL, ORDER_USER_ORDERS_URL } from '../shared/constants/urls';
 import { Order } from '../shared/models/Order';
 import { catchError } from 'rxjs/operators';
 import { UserService } from './user.service';
@@ -135,5 +135,25 @@ export class OrderService {
         return throwError(() => error);
       })
     );
+  }
+
+  // Add inside OrderService class
+  // getUserOrders(): Observable<Order[]> {
+  //   const headers = this.getAuthHeaders(); // Include auth token
+  //   return this.http.get<Order[]>(ORDER_NEW_FOR_CURRENT_USER_URL, { headers }).pipe(
+  //     catchError((error: HttpErrorResponse) => {
+  //       console.error('Error fetching user orders:', error);
+  //       return throwError(() => error);
+  //     })
+  //   );
+  // }
+  getUserOrders(): Observable<Order[]> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<Order[]>(ORDER_USER_ORDERS_URL, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching user orders:', error);
+        return throwError(() => error);
+      })
+    );;
   }
 }

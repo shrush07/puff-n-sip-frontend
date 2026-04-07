@@ -1,0 +1,25 @@
+<div class="orders-container">
+  <h2 class="orders-header">My Orders</h2>
+  <table *ngIf="orders.length > 0; else noOrders" class="order-card">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order._id }}</td>
+        <td>{{ order.createdAt | date:'mediumDate' }}</td>
+        <td>{{ order.status }}</td>
+        <td>${{ order.totalPrice }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noOrders>
+    <p>No orders found.</p>
+  </ng-template>
+</div>

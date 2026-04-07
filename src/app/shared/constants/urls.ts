@@ -2,13 +2,13 @@ import { environment } from "../../../environments/environment";
 
 const BASE_URL = environment.apiUrl;
 
-export const FOODS_URL = BASE_URL + '/api/foods';
+export const FOODS_URL = BASE_URL + '/foods';
 export const FOODS_TAGS_URL = FOODS_URL + '/tags';
 export const FOODS_BY_SEARCH_URL = FOODS_URL + '/search/';
 export const FOODS_BY_TAG_URL = FOODS_URL + '/tag/';
 export const FOODS_BY_ID_URL = FOODS_URL + '/';
 
-export const ORDER_ADD_CART_URL = BASE_URL + '/api/cart/add';
+export const ORDER_ADD_CART_URL = BASE_URL + '/cart/add';
 export const UPDATE_FAVORITE_URL = FOODS_URL; 
 
  
@@ -22,8 +22,10 @@ export const ORDER_CREATE_URL = ORDERS_URL + '/create';
 export const ORDER_NEW_FOR_CURRENT_USER_URL = ORDERS_URL + '/newOrderForCurrentUser';
 export const ORDER_BY_ID_URL = ORDERS_URL + '/order';
 export const ORDER_SUMMARY_URL = ORDERS_URL + '/order-summary';
+export const ORDER_USER_ORDERS_URL = ORDERS_URL + '/my-orders';
 export const ORDER_LATEST_URL = ORDERS_URL + '/latest';
 export const ORDER_UPDATE_URL = ORDERS_URL + '/update/';
 export const ORDER_PAY_URL = ORDERS_URL + '/payment';
 export const PAYMENT_SUCCESS = ORDERS_URL + '/payment/success';
 export const ORDER_TRACK_URL = ORDERS_URL + '/track/';
+

@@ -36,6 +36,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 // Import third-party modules
 import { ToastrModule } from 'ngx-toastr';
 import { loadStripe } from '@stripe/stripe-js';
+import { OrdersPageComponent } from './components/pages/orders-page/orders-page.component';
+import { SettingsPageComponent } from './components/pages/settings-page/settings-page.component';
+import { ProfilePageComponent } from './components/pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,9 @@ import { loadStripe } from '@stripe/stripe-js';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
+    ProfilePageComponent,
+    OrdersPageComponent,
+    SettingsPageComponent,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

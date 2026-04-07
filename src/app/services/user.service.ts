@@ -6,6 +6,7 @@ import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { RESET_PASSWORD_URL, USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
 import { User } from '../shared/models/User';
+import { environment } from '../../environments/environment.prod';
 
 const USER_KEY = 'User';
 const TOKEN_KEY = 'token';
@@ -167,11 +168,17 @@ export class UserService {
   }
 
   // Handle API errors
-  private handleError(errorResponse: any): Observable<never> {
-    console.error('API error:', errorResponse);
-    this.toastrService.error(errorResponse.error?.message || 'An error occurred', 'Error');
-    return throwError(() => errorResponse);
+  private handleError = (errorResponse: any): Observable<never> => {
+  console.error('API error:', errorResponse);
+
+  if (this.toastrService) {
+    this.toastrService.error(
+      errorResponse.error?.message || 'Something went wrong'
+    );
   }
+
+  return throwError(() => errorResponse);
+};
 
   // Check if user is logged in
   isLoggedIn(): boolean {
@@ -215,4 +222,30 @@ export class UserService {
       catchError(this.handleError)
     );
   }
+
+// Get current user's profile
+getUserProfile(): Observable<User> {
+  return this.http.get<User>(`${environment.apiUrl}/api/users/profile`).pipe(
+    tap(user => {
+      this.setUserToLocalStorage(user);
+      this.userSubject.next(user);
+    }),
+    catchError((error) => this.handleError(error))
+  );
+}
+
+// Update current user's profile
+updateUserProfile(data: Partial<User>): Observable<User> {
+  return this.http.put<User>(`${environment.apiUrl}/api/users/profile`, data).pipe(
+    tap(user => {
+      this.setUserToLocalStorage(user);
+      this.userSubject.next(user);
+      this.toastrService.success('Profile updated successfully');
+    }),
+    catchError((error) => this.handleError(error))
+  );
+}
+
+
+
 }

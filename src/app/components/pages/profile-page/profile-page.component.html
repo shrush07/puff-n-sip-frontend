@@ -1,0 +1,19 @@
+<div class="profile-container">
+  <h2 class="profile-header">Profile</h2>
+  
+  <div *ngIf="user; else loading" class="profile-card">
+    <div class="edit-btn">
+        <button (click)="goToSettings()">
+        <i class="fas fa-edit"></i> Edit
+        </button>
+    </div>
+    <p><strong>Name:</strong> {{ user?.name }}</p>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
+    <p><strong>Phone:</strong> {{ user?.phone || 'N/A' }}</p>
+    <p><strong>Address:</strong> {{ user?.address || 'N/A' }}</p>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading profile...</p>
+  </ng-template>
+</div>

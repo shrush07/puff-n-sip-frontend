@@ -17,6 +17,9 @@ import { FavoritesComponent } from './components/pages/favorites/favorites.compo
 
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AdminGuard } from './auth/guards/admin.guard';
+import { ProfilePageComponent } from './components/pages/profile-page/profile-page.component';
+import { OrdersPageComponent } from './components/pages/orders-page/orders-page.component';
+import { SettingsPageComponent } from './components/pages/settings-page/settings-page.component';
 
 const routes: Routes = [
   // Public user routes
@@ -31,6 +34,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'favorites', component: FavoritesComponent },
+  { path: 'profile', component: ProfilePageComponent },
+  { path: 'orders', component: OrdersPageComponent },
+  { path: 'settings', component: SettingsPageComponent },
 
   // Protected user routes
   { path: 'checkout', component: CheckoutPageComponent, canActivate: [AuthGuard] },

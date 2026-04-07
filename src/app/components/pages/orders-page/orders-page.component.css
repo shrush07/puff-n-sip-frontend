@@ -1,0 +1,59 @@
+/* ---- Orders Page ---- */
+.orders-container {
+    margin-left: 260px;
+    padding: 3rem;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 60px);
+    font-family: 'Archivo', sans-serif;
+}
+
+.orders-header {
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+    color: #b08f5c;
+    margin-bottom: 2rem;
+}
+
+.order-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgb(0 0 0 / 10%);
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-card .order-id {
+    font-weight: 600;
+    color: #49340d;
+    margin-bottom: 0.5rem;
+}
+
+.order-card .order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: #49340d;
+}
+
+.order-card .order-total {
+    font-size: 18px;
+    color: #b08f5c;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.order-card button {
+    background-color: #b08f5c;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.order-card button:hover {
+    background-color: #49340d;
+}
