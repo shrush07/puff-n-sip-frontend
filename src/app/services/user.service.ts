@@ -225,7 +225,7 @@ export class UserService {
 
 // Get current user's profile
 getUserProfile(): Observable<User> {
-  return this.http.get<User>(`${environment.apiUrl}/api/users/profile`).pipe(
+  return this.http.get<User>(`${environment.apiUrl}/users/profile`).pipe(
     tap(user => {
       this.setUserToLocalStorage(user);
       this.userSubject.next(user);
@@ -236,7 +236,7 @@ getUserProfile(): Observable<User> {
 
 // Update current user's profile
 updateUserProfile(data: Partial<User>): Observable<User> {
-  return this.http.put<User>(`${environment.apiUrl}/api/users/profile`, data).pipe(
+  return this.http.put<User>(`${environment.apiUrl}/users/profile`, data).pipe(
     tap(user => {
       this.setUserToLocalStorage(user);
       this.userSubject.next(user);
