@@ -25,22 +25,22 @@ export class HomeComponent implements OnInit {
     {
       number: '01',
       title: 'About Us',
-      description: 'Lorem Ipsum is simply dummy text of the printing industry.',
+      description: 'We are passionate about crafting a cozy experience where every sip and bite brings comfort, quality, and joy to your day.',
     },
     {
       number: '02',
       title: 'Our Coffee',
-      description: 'Lorem Ipsum has been the industry\'s standard text.',
+      description: 'Freshly brewed with premium beans, our coffee is made to energize your mornings and elevate your everyday moments.',
     },
     {
       number: '03',
       title: 'Our Mocktails',
-      description: 'Lorem Ipsum is used as placeholder text.',
+      description: 'Refreshing blends of fruits and flavors, our mocktails are designed to delight your taste buds without the alcohol, perfect for any moment.',
     },
     {
       number: '04',
       title: 'Our Puffs',
-      description: 'Lorem Ipsum is a popular text used in design.',
+      description: 'Our puffs are made with love and the finest ingredients, delivering a perfect blend of flaky pastry and delicious fillings in every bite.',
     },
   ];
 
