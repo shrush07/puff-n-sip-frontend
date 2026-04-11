@@ -1,6 +1,29 @@
 <div class="orders-container">
   <h2 class="orders-header">My Orders</h2>
-  <table *ngIf="orders.length > 0; else noOrders" class="order-card">
+
+  <!-- FILTER BUTTONS -->
+  <div class="filter-buttons">
+    <button 
+      [class.active]="selectedStatus === 'COMPLETED'"
+      (click)="onFilterChange('COMPLETED')">
+      Completed
+    </button>
+
+    <button 
+      [class.active]="selectedStatus === 'NEW'"
+      (click)="onFilterChange('NEW')">
+      Uncompleted
+    </button>
+
+    <button 
+      [class.active]="selectedStatus === 'ALL'"
+      (click)="onFilterChange('ALL')">
+      All
+    </button>
+  </div>
+
+  <!-- TABLE -->
+  <table *ngIf="filteredOrders.length > 0; else noOrders" class="order-table">
     <thead>
       <tr>
         <th>Order ID</th>
@@ -9,17 +32,29 @@
         <th>Total</th>
       </tr>
     </thead>
+
     <tbody>
-      <tr *ngFor="let order of orders">
-        <td>{{ order._id }}</td>
+      <tr *ngFor="let order of filteredOrders">
+        <td class="order-id">{{ order._id }}</td>
         <td>{{ order.createdAt | date:'mediumDate' }}</td>
-        <td>{{ order.status }}</td>
-        <td>${{ order.totalPrice }}</td>
+
+        <td>
+          <span 
+            class="status"
+            [ngClass]="{
+              'completed': order.status === 'COMPLETED',
+              'pending': order.status === 'NEW'
+            }">
+            {{ getDisplayStatus(order.status) }}
+          </span>
+        </td>
+
+        <td class="price">₹{{ order.totalPrice }}</td>
       </tr>
     </tbody>
   </table>
 
   <ng-template #noOrders>
-    <p>No orders found.</p>
+    <p class="no-orders">No orders found.</p>
   </ng-template>
 </div>

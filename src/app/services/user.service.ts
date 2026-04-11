@@ -227,8 +227,16 @@ export class UserService {
 getUserProfile(): Observable<User> {
   return this.http.get<User>(`${environment.apiUrl}/users/profile`).pipe(
     tap(user => {
-      this.setUserToLocalStorage(user);
-      this.userSubject.next(user);
+      const currentUser = this.getUserFromLocalStorage();
+
+      const updatedUser = {
+        ...user,
+        token: currentUser.token,
+        refreshToken: currentUser.refreshToken
+      };
+
+      this.setUserToLocalStorage(updatedUser);
+      this.userSubject.next(updatedUser);
     }),
     catchError((error) => this.handleError(error))
   );
@@ -238,8 +246,17 @@ getUserProfile(): Observable<User> {
 updateUserProfile(data: Partial<User>): Observable<User> {
   return this.http.put<User>(`${environment.apiUrl}/users/profile`, data).pipe(
     tap(user => {
-      this.setUserToLocalStorage(user);
-      this.userSubject.next(user);
+      const currentUser = this.getUserFromLocalStorage();
+
+      const updatedUser = {
+        ...user,
+        token: currentUser.token,
+        refreshToken: currentUser.refreshToken
+      };
+
+      this.setUserToLocalStorage(updatedUser);
+      this.userSubject.next(updatedUser);
+
       this.toastrService.success('Profile updated successfully');
     }),
     catchError((error) => this.handleError(error))

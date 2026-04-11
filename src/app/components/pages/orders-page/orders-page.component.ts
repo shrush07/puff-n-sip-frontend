@@ -13,6 +13,10 @@ import { Order } from '../../../shared/models/Order';
 })
 export class OrdersPageComponent implements OnInit {
   orders: Order[] = [];
+  filteredOrders: Order[] = [];
+
+  // Default filter = COMPLETED
+  selectedStatus: string = 'COMPLETED';
 
   constructor(private orderService: OrderService) {}
 
@@ -21,8 +25,33 @@ export class OrdersPageComponent implements OnInit {
       next: (data) => {
         console.log('Orders from API:', data);
         this.orders = data;
+
+        // Apply default filter
+        this.applyFilter();
       },
       error: (err) => console.error('Error:', err),
     });
+  }
+
+  // Filter logic
+  applyFilter() {
+    if (this.selectedStatus === 'ALL') {
+      this.filteredOrders = this.orders;
+    } else {
+      this.filteredOrders = this.orders.filter(
+        order => order.status === this.selectedStatus
+      );
+    }
+  }
+
+  // Change filter
+  onFilterChange(status: string) {
+    this.selectedStatus = status;
+    this.applyFilter();
+  }
+
+  // Convert backend status → user friendly label
+  getDisplayStatus(status: string): string {
+    return status === 'NEW' ? 'Uncompleted' : status;
   }
 }
