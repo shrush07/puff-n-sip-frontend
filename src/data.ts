@@ -161,5 +161,13 @@ export const sample_foods: any[] = [
       phone: '1234567890',
       isAdmin: true,
     },
+    {
+      name: 'Hard Amin',
+      email: 'aminhard01@gmail.com',
+      password: '1234567',
+      address: 'Calgary',
+      phone: '1234567890',
+      isAdmin: true,
+    },
   ];
   
