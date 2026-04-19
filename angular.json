@@ -32,7 +32,10 @@
               "src/_redirects",
               "src/favicon.ico"
             ],
-            "styles": ["src/styles.css", "node_modules/ngx-toastr/toastr.css"],
+            "styles": [
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
+            ],
             "scripts": [],
             "allowedCommonJsDependencies": [
               "leaflet",
@@ -43,8 +46,16 @@
             "production": {
               "outputHashing": "all",
               "budgets": [
-                { "type": "initial", "maximumWarning": "2MB", "maximumError": "5MB" },
-                { "type": "anyComponentStyle", "maximumWarning": "100kB", "maximumError": "200kB" }
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "100kB",
+                  "maximumError": "200kB"
+                }
               ],
               "fileReplacements": [
                 {
@@ -58,26 +69,40 @@
               "extractLicenses": false,
               "sourceMap": true
             }
-          },
-          "defaultConfiguration": "production"
-
+          }
         },
+
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": { "proxyConfig": "src/proxy.conf.json" },
-          "configurations": {
-            "production": { "buildTarget": "frontend:build:production" },
-            "development": { "buildTarget": "frontend:build:development" }
+          "options": {
+            "proxyConfig": "src/proxy.conf.json"
           },
-          "defaultConfiguration": "development"
+          "configurations": {
+            "production": {
+              "buildTarget": "frontend:build:production"
+            },
+            "development": {
+              "buildTarget": "frontend:build:development"
+            }
+          }
         },
-        "extract-i18n": { "builder": "@angular-devkit/build-angular:extract-i18n" },
+
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "main": "src/test.ts",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [{ "glob": "**/*", "input": "public" }, "src/favicon.ico", "src/_redirects", "src/assets"],
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              { "glob": "**/*", "input": "public" },
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "src/styles.css",
               "node_modules/toastr/build/toastr.css",
@@ -89,5 +114,7 @@
       }
     }
   },
-  "cli": { "analytics": "26375235-2502-414d-8062-3380c3c2f22f" }
+  "cli": {
+    "analytics": false
+  }
 }

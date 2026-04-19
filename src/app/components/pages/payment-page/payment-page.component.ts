@@ -10,7 +10,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Cart } from '../../../shared/models/Cart';
 import { jwtDecode } from 'jwt-decode';
 import { StripeService } from '../../../services/stripe.service';
-import { environment } from '../../../../environments/environment';
 import { ORDER_PAY_URL } from '../../../shared/constants/urls';
 
 @Component({
@@ -138,7 +137,7 @@ export class PaymentPageComponent implements OnInit,  AfterViewInit {
       }
       console.log('Confirming payment with client secret:', this.clientSecret);
 
-      const paymentIntent = await this.stripeService.confirmCardPayment(this.clientSecret);
+      const paymentIntent = await this.stripeService.confirmPayment(this.clientSecret);
       
       console.log('Payment successful:', paymentIntent);
       // Handle successful payment
