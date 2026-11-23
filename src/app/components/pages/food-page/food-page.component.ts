@@ -39,14 +39,31 @@ export class FoodPageComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-  const isFullUrl = imageFileName.startsWith('http');
-  const backendUrl = isFullUrl 
-    ? '' 
-    : (window.location.hostname === 'localhost' 
-        ? 'http://localhost:5000' 
-        : 'https://puff-sip.onrender.com');
-  return isFullUrl ? imageFileName : `${backendUrl}/images/${imageFileName}`;
-}
+      if (!imageFileName) {
+        return '';
+      }
+
+      if (/^https?:\/\//i.test(imageFileName)) {
+        try {
+          const imageUrl = new URL(imageFileName);
+
+          if (
+            imageUrl.hostname === 'localhost' ||
+            imageUrl.hostname === '127.0.0.1'
+          ) {
+            const fileName = imageUrl.pathname.split('/').pop();
+            return fileName ? `/images/${fileName}` : '';
+          }
+
+          return imageFileName;
+        } catch {
+          return imageFileName;
+        }
+      }
+
+      const fileName = imageFileName.replace(/^\/?images\//, '');
+      return fileName ? `/images/${fileName}` : '';
+    }
 
 
   addToCart(){

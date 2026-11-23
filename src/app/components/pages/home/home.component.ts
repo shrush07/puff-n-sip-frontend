@@ -95,19 +95,31 @@ export class HomeComponent implements OnInit {
   }
 
   getImageUrl(imageFileName: string): string {
-  // If it's already a full URL, return as-is
-  if (imageFileName.startsWith('http')) {
-    return imageFileName;
-  }
+      if (!imageFileName) {
+        return '';
+      }
 
-  // Otherwise, prepend backend URL and images folder
-  const backendUrl =
-    window.location.hostname === 'localhost'
-      ? 'http://localhost:5000'
-      : 'https://puff-sip.onrender.com';
+      if (/^https?:\/\//i.test(imageFileName)) {
+        try {
+          const imageUrl = new URL(imageFileName);
 
-  return `${backendUrl}/images/${imageFileName}`;
-}
+          if (
+            imageUrl.hostname === 'localhost' ||
+            imageUrl.hostname === '127.0.0.1'
+          ) {
+            const fileName = imageUrl.pathname.split('/').pop();
+            return fileName ? `/images/${fileName}` : '';
+          }
+
+          return imageFileName;
+        } catch {
+          return imageFileName;
+        }
+      }
+
+      const fileName = imageFileName.replace(/^\/?images\//, '');
+      return fileName ? `/images/${fileName}` : '';
+    }
   
 
   toggleFavorite(food: Food): void {
